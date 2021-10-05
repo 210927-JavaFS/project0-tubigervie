@@ -23,38 +23,13 @@ public class StandardUserInventoryMenuController {
 				case "view":
 					ArrayList<Card> cards = standardUserService.getInventory(user);
 					int cardCount = cards.size();
+					
 					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory:");
 					for(int i = 0; i < cardCount; i++)
-					{
 						System.out.println(String.format("%d) %s", i + 1, cards.get(i).getName()));
-					}
 					
 					if(cardCount > 0)
-					{
-						while(true)
-						{
-							System.out.println("Type in the number of the card you would like to examine or type RETURN to go back to the home page.");
-							String response2 = scan.nextLine();
-							if(response2.toLowerCase() == "return")
-							{
-								inInventory = false;
-								break;
-							}
-							try {
-								int number = Integer.parseInt(response2);
-								if(number > cardCount) {
-									System.out.println("Invalid input. Try again. \n");
-									continue;
-								}
-								System.out.println(cards.get(number - 1).toString());
-								break;
-							}
-							catch(NumberFormatException e){
-								System.out.println("Invalid input. Try again. \n");
-								continue;
-							}
-						}
-					}			
+						inInventory = enterView(cards, cardCount);		
 					break;
 				case "return":
 					inInventory = false;
@@ -64,5 +39,27 @@ public class StandardUserInventoryMenuController {
 			}
 		}
 		return false;
+	}
+	
+	private boolean enterView(ArrayList<Card> cards, int cardCount)
+	{
+		while(true)
+		{
+			System.out.println("Type in the number of the card you would like to examine.");
+			String response2 = scan.nextLine();
+			try {
+				int number = Integer.parseInt(response2);
+				if(number > cardCount) {
+					System.out.println("Invalid input. Try again. \n");
+					continue;
+				}
+				System.out.println(cards.get(number - 1).toString());
+				return true;
+			}
+			catch(NumberFormatException e){
+				System.out.println("Invalid input. Try again. \n");
+				continue;
+			}
+		}
 	}
 }

@@ -18,9 +18,20 @@ public class StandardUserService extends UserService{
 		user.addToInventory(card);
 	}
 	
+	public void addCardToDeck(StandardUser user, Card card, Deck deck) 
+	{
+		user.addToDeck(deck, card);
+	}
+	
+	
 	public Deck createDeck(StandardUser user, String deckName)
 	{
 		return user.createNewDeck(deckName);
+	}
+	
+	public ArrayList<Deck> getDecks(StandardUser user)
+	{
+		return user.getDecks();
 	}
 	
 	public Deck getDeck(StandardUser user, int id)
