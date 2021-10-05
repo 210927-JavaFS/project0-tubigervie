@@ -27,8 +27,8 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 				case "search": // open SearchMenuController
 					break;
 				case "inventory": //open InventoryMenuController
-					int cardCount = standardUser.getInventory().size();
-					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.\n");
+					StandardUserInventoryMenuController inventory = new StandardUserInventoryMenuController();
+					inventory.enterInventoryPage(standardUser);
 					break;
 				case "deck": //open DeckMenuController
 					int deckCount = standardUser.getDecks().size();
@@ -41,7 +41,7 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 					break;
 				case "add":
 					Card testCard = new Card(1, "test", 1, "this is a test card", RarityType.common);
-					standardUserService.addCard(standardUser, testCard);
+					standardUserService.addCardToInventory(standardUser, testCard);
 					System.out.println("\nAdding card: \n");
 					System.out.println(testCard.toString());
 					

@@ -5,21 +5,32 @@ import java.util.HashMap;
 public class Deck {
 	static final int MAX_CARDS = 20;
 	
+	static int deckIDCounter = 0;
+	
+	private int deckID;
 	private String name;
 	private int currentCardCount = 0;
 	private HashMap<Integer, Integer> deckMap = new HashMap<Integer, Integer>();
 	
 	public Deck(String name) 
 	{
+		this.deckID = deckIDCounter; // test value
+		deckIDCounter++; //testing
 		this.name = name;
 		this.currentCardCount = 0;
 	}
 	
-	public Deck(String name, int cardCount, HashMap<Integer, Integer> map) 
+	public Deck(int deckID, String name, int cardCount, HashMap<Integer, Integer> map) 
 	{
+		this.deckID = deckID;
 		this.name = name;
 		this.currentCardCount = cardCount;
 		this.deckMap = map;
+	}
+	
+	public int getDeckID()
+	{
+		return deckID;
 	}
 	
 	public String getName()

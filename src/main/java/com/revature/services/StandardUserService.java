@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.ArrayList;
+
 import com.revature.models.Card;
 import com.revature.models.Deck;
 import com.revature.models.StandardUser;
@@ -11,7 +13,7 @@ public class StandardUserService extends UserService{
 		return new StandardUser(username, password);
 	}
 	
-	public void addCard(StandardUser user, Card card) 
+	public void addCardToInventory(StandardUser user, Card card) 
 	{
 		user.addToInventory(card);
 	}
@@ -21,9 +23,14 @@ public class StandardUserService extends UserService{
 		return user.createNewDeck(deckName);
 	}
 	
-	public Deck getDeck(StandardUser user, int index)
+	public Deck getDeck(StandardUser user, int id)
 	{
-		return user.getDecks().get(index);
+		return user.getDecks().get(id);
+	}
+	
+	public ArrayList<Card> getInventory(StandardUser user)
+	{
+		return user.getInventory();
 	}
 	
 }
