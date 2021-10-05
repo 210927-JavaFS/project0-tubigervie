@@ -1,7 +1,7 @@
 package com.revature;
 
 import com.revature.controllers.LoginMenuController;
-import com.revature.models.StandardUser;
+import com.revature.controllers.StandardUserHomePageMenuController;
 import com.revature.models.User;
 
 public class Driver {
@@ -9,8 +9,14 @@ public class Driver {
 		System.out.println("Welcome to Hearthstone Deck Builder!");
 		
 		LoginMenuController menuController = new LoginMenuController();
-
-		User user = menuController.getUser();
-		System.out.println("This user has " + ((StandardUser)user).getInventory().size() + " cards in the inventory");
+		
+		while(menuController.getApplicationStatus()) {
+			User user = menuController.getUser();
+			
+			StandardUserHomePageMenuController homePageMenuController = new StandardUserHomePageMenuController();
+			if(user != null) {
+				homePageMenuController.enterHomePage(user);	
+			}
+		}
 	}
 }
