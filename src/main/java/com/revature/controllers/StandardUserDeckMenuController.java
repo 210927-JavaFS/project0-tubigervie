@@ -18,7 +18,7 @@ public class StandardUserDeckMenuController {
 	{
 		boolean inDecks = true;
 		while(inDecks) {
-			System.out.println("Decks - What would you like to do? \n" + "VIEW | " + "CREATE | " + "EDIT | " + "DELETE | " + "RETURN");
+			System.out.println("\nDecks - What would you like to do? \n" + "VIEW | " + "CREATE | " + "EDIT | " + "DELETE | " + "RETURN");
 			String response = scan.nextLine();
 			switch(response.toLowerCase())
 			{

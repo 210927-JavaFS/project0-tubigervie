@@ -16,7 +16,7 @@ public class StandardUserInventoryMenuController {
 	{
 		boolean inInventory = true;
 		while(inInventory) {
-			System.out.println("Inventory - What would you like to do? \n" + "VIEW | " + "RETURN");
+			System.out.println("\nInventory - What would you like to do? \n" + "VIEW | " + "RETURN");
 			String response = scan.nextLine();
 			switch(response.toLowerCase())
 			{
@@ -25,6 +25,7 @@ public class StandardUserInventoryMenuController {
 					int cardCount = cards.size();
 					
 					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");
+
 					for(int i = 0; i < cardCount; i++)
 						System.out.println(String.format("%d) %s", i + 1, cards.get(i).getName()));
 					

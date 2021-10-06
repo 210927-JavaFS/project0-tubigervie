@@ -1,0 +1,3 @@
+id,name,manacost,description,rarity,cardtype
+1,Abomination,5,Taunt. Deathrattle:Deal 2 damage to all characters,rare,minion
+2,Abusive Sergeant,1,Battlecry: Give a minnion +2 attack this turn.,common,minion

@@ -1,8 +1,9 @@
 package com.revature.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.revature.models.Card;
-import com.revature.models.Card.CardType;
-import com.revature.models.Card.RarityType;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
 import com.revature.services.StandardUserService;
@@ -35,10 +36,30 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 					decks.enterDeckPage(standardUser);
 					break;
 				case "add":
-					Card testCard = new Card(1, "test", 1, "this is a test card", RarityType.common, CardType.spell);
-					standardUserService.addCardToInventory(standardUser, testCard);
-					System.out.println("\nAdding card: \n");
-					System.out.println(testCard.toString());
+					HashMap<Integer, Card> cardMap = StandardUserService.getAllCards();
+					for(Map.Entry<Integer, Card> entry : cardMap.entrySet())
+					{
+						System.out.println(String.format("%d) %s", (int)entry.getKey(), entry.getValue().getName()));
+					}
+					while(true)
+					{
+						System.out.println("Type in the number of the card you would like to add to your inventory.");
+						String response2 = scan.nextLine();
+						try {
+							int number = Integer.parseInt(response2);
+							if(number <= 0 || number > cardMap.size()) {
+								System.out.println("Invalid input. Try again. \n");
+								continue;
+							}
+							standardUserService.addCardToInventory(standardUser, cardMap.get(number));
+							System.out.println("Added \"" + cardMap.get(number).getName() + "\" to your inventory!");
+							break;
+						}
+						catch(NumberFormatException e){
+							System.out.println("Invalid input. Try again. \n");
+							continue;
+						}
+					}
 					break;
 				case "help":
 					System.out.println("\nSEARCH: search for a card, deck, or account \n" + "INVENTORY: check your cards \n"
