@@ -19,8 +19,8 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 		System.out.println(String.format("Welcome, %s!", standardUser.getUserName()));
 		while(loggedIn)
 		{
-			System.out.println("What would you like to do? \n" + "SEARCH | " + "INVENTORY | "
-							+ "DECK | " + "ADD | " + "LOGOUT | " + "HELP");
+			System.out.println("Home - What would you like to do? \n" + "SEARCH | " + "INVENTORY | "
+							+ "DECKS | " + "ADD | " + "LOGOUT | " + "HELP");
 			String response = scan.nextLine();
 			switch(response.toLowerCase())
 			{
@@ -30,7 +30,7 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 					StandardUserInventoryMenuController inventory = new StandardUserInventoryMenuController();
 					inventory.enterInventoryPage(standardUser);
 					break;
-				case "deck": //open DeckMenuController
+				case "decks": //open DeckMenuController
 					StandardUserDeckMenuController decks = new StandardUserDeckMenuController();
 					decks.enterDeckPage(standardUser);
 					break;

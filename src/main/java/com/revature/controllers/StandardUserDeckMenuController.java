@@ -18,7 +18,7 @@ public class StandardUserDeckMenuController {
 	{
 		boolean inDecks = true;
 		while(inDecks) {
-			System.out.println("What would you like to do? \n" + "VIEW | " + "CREATE | " + "EDIT | " + "DELETE | " + "RETURN");
+			System.out.println("Decks - What would you like to do? \n" + "VIEW | " + "CREATE | " + "EDIT | " + "DELETE | " + "RETURN");
 			String response = scan.nextLine();
 			switch(response.toLowerCase())
 			{
@@ -37,6 +37,7 @@ public class StandardUserDeckMenuController {
 					inDecks = enterCreate(user);
 					break;
 				case "edit":
+					inDecks = enterEdit(user);
 					break;
 				case "delete":
 					break;
@@ -48,6 +49,51 @@ public class StandardUserDeckMenuController {
 			}
 		}
 		return false;
+	}
+	
+	public boolean enterEdit(StandardUser user)
+	{
+		ArrayList<Deck> decks = standardUserService.getDecks(user);
+		int deckCount = decks.size();
+		System.out.println("\nYour account currently has " + deckCount + " deck(s) created.\n");
+		if(deckCount > 0) {
+			for(int i = 0; i < deckCount; i++)
+				System.out.println(String.format("%d) %s", i + 1, decks.get(i).getName()));
+			while(true)
+			{
+				System.out.println("\nType in the number of the deck you would like to edit.");
+				String response = scan.nextLine();
+				try {
+					int number = Integer.parseInt(response);
+					if(number > deckCount) {
+						System.out.println("Invalid input. Try again. \n");
+						continue;
+					}
+					Deck deck = decks.get(number - 1);
+					while(true)
+					{
+						System.out.println("What would you like to do? \n" + "ADD | " + "DELETE | " + "RETURN");
+						String response2 = scan.nextLine();
+						switch(response2.toLowerCase())
+						{
+							case "add":
+								break;
+							case "delete":
+								break;
+							case "return":
+								return true;
+							default:
+								break;
+						}
+					}	
+				}
+				catch(NumberFormatException e){
+					System.out.println("Invalid input. Try again.");
+					continue;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public boolean enterCreate(StandardUser user)
