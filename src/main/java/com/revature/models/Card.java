@@ -5,7 +5,7 @@ public class Card {
 	
 	public enum CardType {spell, minion, weapon};
 	public enum RarityType {common, rare, epic, legendary};
-	public enum ClassType {shaman, mage, warrior, rogue, neutral, paladin, hunter, warlock}
+	public enum ClassType {shaman, mage, warrior, rogue, neutral, paladin, hunter, warlock, druid, priest}
 	
 	protected int index;
 	
@@ -34,7 +34,7 @@ public class Card {
 	
 	public String getName()
 	{
-		return this.name;
+		return this.name.toUpperCase();
 	}
 	
 	public int getManaCost()

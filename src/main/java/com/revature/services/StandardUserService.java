@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import com.revature.models.StandardUser;
 import com.revature.models.User;
@@ -37,7 +38,7 @@ public class StandardUserService extends UserService{
 		return user.getInventory();
 	}
 	
-	public HashMap<Integer, Integer> getInventoryMap(StandardUser user)
+	public HashMap<Integer, Integer> getInventoryHashMap(StandardUser user)
 	{
 		ArrayList<Integer> inventory = getInventory(user);
 		HashMap<Integer, Integer> inventoryMap = new HashMap<Integer, Integer>();
@@ -50,5 +51,11 @@ public class StandardUserService extends UserService{
 				inventoryMap.put(itemIndex, 1);
 		}
 		return inventoryMap;
+	}
+	
+	public TreeMap<Integer, Integer> getInventoryTreeMap(StandardUser user, HashMap<Integer, Integer> inventoryMap)
+	{
+		TreeMap<Integer, Integer> sortedMap = new TreeMap<Integer, Integer>(inventoryMap);
+		return sortedMap;
 	}
 }

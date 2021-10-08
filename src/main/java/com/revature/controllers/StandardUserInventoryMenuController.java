@@ -1,8 +1,11 @@
 package com.revature.controllers;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
+import com.revature.models.Card;
 import com.revature.models.StandardUser;
 import com.revature.services.CardService;
 import com.revature.services.StandardUserService;
@@ -17,21 +20,20 @@ public class StandardUserInventoryMenuController {
 	{
 		boolean inInventory = true;
 		while(inInventory) {
-			System.out.println("\nInventory - What would you like to do? \n" + "VIEW | " + "RETURN");
+			System.out.println("\nInventory - What would you like to do? \n" + "VIEW | " + "EDIT | " + "RETURN");
 			String response = scan.nextLine().trim();
 			switch(response.toLowerCase())
 			{
 				case "view":
-					ArrayList<Integer> cards = standardUserService.getInventory(user);
-					int cardCount = cards.size();
+					HashMap<Integer, Integer> inventoryMap = standardUserService.getInventoryHashMap(user);
+					int cardCount = standardUserService.getInventory(user).size();
 					
-					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");
-
-					for(int i = 0; i < cardCount; i++)
-						System.out.println(String.format("%d) %S", i + 1, cardService.findCard(cards.get(i)).getName()));
-					
+					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");					
 					if(cardCount > 0)
-						inInventory = enterView(cards, cardCount);		
+						inInventory = enterView(inventoryMap, cardCount, user);		
+					break;
+				case "edit":
+					//inInventory = enterEdit(user);
 					break;
 				case "return":
 					inInventory = false;
@@ -44,19 +46,26 @@ public class StandardUserInventoryMenuController {
 		return false;
 	}
 	
-	private boolean enterView(ArrayList<Integer> cards, int cardCount)
+	private boolean enterView(HashMap<Integer, Integer> inventoryMap, int cardCount, StandardUser user)
 	{
 		while(true)
 		{
-			System.out.println("Type in the number of the card you would like to examine.");
+			TreeMap<Integer, Integer> sortedInventoryMap = standardUserService.getInventoryTreeMap(user, inventoryMap);
+			for(Map.Entry<Integer, Integer> entry : sortedInventoryMap.entrySet())
+			{
+				Card card = cardService.findCard(entry.getKey());
+				System.out.println(String.format("%d) %s x%d", card.getIndex(), card.getName(), entry.getValue()));
+			}
+			
+			System.out.println("\nType in the number of the card you would like to examine.");
 			String response2 = scan.nextLine().trim();
 			try {
 				int number = Integer.parseInt(response2);
-				if(number > cardCount || number <= 0) {
+				if(!inventoryMap.containsKey(number)) {
 					System.out.println("Invalid input. Try again. \n");
 					continue;
 				}
-				System.out.println(cardService.findCard(cards.get(number - 1)).toString());
+				System.out.println(cardService.findCard(number).toString());
 				return true;
 			}
 			catch(NumberFormatException e){

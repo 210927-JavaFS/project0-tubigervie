@@ -1,14 +1,16 @@
 package com.revature.daos;
 
-import java.io.File;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import com.revature.models.Card;
 import com.revature.models.Card.CardType;
 import com.revature.models.Card.ClassType;
 import com.revature.models.Card.RarityType;
+import com.revature.utils.ConnectionUtil;
 
 public class CardDAO {
 
@@ -27,28 +29,30 @@ public class CardDAO {
 	private void initializeCards()
 	{
 		System.out.println("Card database being initialized");
-		cardMap = new HashMap<Integer, Card>();
-		try 
+		try(Connection conn = ConnectionUtil.getConnection())
 		{
-			Scanner scan = new Scanner(new File("C:\\Users\\ervie\\Documents\\Work Stuff\\Repos\\project0-tubigervie\\src\\main\\resources\\CardDatabase.txt"));
-			scan.nextLine();
-			while(scan.hasNextLine())
+			String sql = "SELECT * From cards;";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			cardMap = new HashMap<Integer, Card>();
+			
+			while(result.next())
 			{
-				String cardString = scan.nextLine();
-				String[] cardArray = cardString.split(";");
-				Card card = new Card(Integer.valueOf(cardArray[0]), cardArray[1], Integer.valueOf(cardArray[2]), cardArray[3], RarityType.valueOf(cardArray[4]), CardType.valueOf(cardArray[5]), ClassType.valueOf(cardArray[6]));
-				
+				Card card = new Card(
+						result.getInt("card_id"),
+						result.getString("card_name"),
+						result.getInt("mana_cost"),
+						result.getString("description"),
+						RarityType.valueOf(result.getString("rarity")),
+						CardType.valueOf(result.getString("card_type")),
+						ClassType.valueOf(result.getString("class_type")));
 				if(!cardMap.containsKey(card.getIndex()))
 					cardMap.put(card.getIndex(), card);
 			}
 		}
-		catch(IOException e)
+		catch(SQLException e)
 		{
-			System.out.println("Could not open cards file.");
-		}
-		catch(NumberFormatException e)
-		{
-			System.out.println("Card in card database not properly formatted.");
+			System.out.println("Could not connect to database instance.");
 		}
 	}
 }

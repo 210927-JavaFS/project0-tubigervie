@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import com.revature.models.Card;
 import com.revature.models.Deck;
@@ -128,14 +129,17 @@ public class StandardUserDeckMenuController {
 	public void enterRemove(StandardUser user, Deck deck)
 	{
 		HashMap<Integer, Integer> editDeckMap = deckService.createDeckMapCopy(deck);
+		TreeMap<Integer, Integer> sortedDeckMap = deckService.createDeckTreeMap(deck);
+		
 		if(editDeckMap.size() == 0) {
 			System.out.println("\nNo cards in your deck to remove.\n");
 			return;
 		}
 		while(true)
 		{
+			sortedDeckMap = deckService.createDeckTreeMap(deck);
 			System.out.println(String.format("\n%s", deck.toString()));
-			printDeck(user, editDeckMap);
+			printDeck(user, sortedDeckMap);
 			System.out.println("\nType in the number of the card you would like to remove or type RETURN when done.");
 			String response2 = scan.nextLine().trim();
 			
@@ -177,9 +181,8 @@ public class StandardUserDeckMenuController {
 			return;
 		}
 		
-		HashMap<Integer, Integer> inventoryMap = standardUserService.getInventoryMap(user);
-		HashMap<Integer, Integer> subsetInventoryMap = deckService.getSubsetInventoryMap(deck.getDeckMap(), inventoryMap);
-		
+		HashMap<Integer, Integer> inventoryMap = standardUserService.getInventoryHashMap(user);
+		TreeMap<Integer, Integer> subsetInventoryMap = deckService.getSubsetInventoryTreeMap(deck.getDeckMap(), standardUserService.getInventoryTreeMap(user, inventoryMap));
 		if(subsetInventoryMap.size() == 0) {
 			System.out.println("\nNo cards in your inventory to add.");
 			return;
@@ -187,8 +190,9 @@ public class StandardUserDeckMenuController {
 		
 		while(true)
 		{
+			TreeMap<Integer, Integer> sortedDeckMap = deckService.createDeckTreeMap(deck);
 			System.out.println(String.format("\n%s", deck.toString()));
-			printDeck(user, deck.getDeckMap());			
+			printDeck(user, sortedDeckMap);			
 			System.out.println("\nInventory");
 			printDeck(user, subsetInventoryMap);
 			System.out.println("\nType in the number of the card you would like to add or type RETURN when done.");
@@ -299,7 +303,7 @@ public class StandardUserDeckMenuController {
 		}
 	}
 	
-	private void printDeck(StandardUser user, HashMap<Integer, Integer> deckCardMap)
+	private void printDeck(StandardUser user, Map<Integer, Integer> deckCardMap)
 	{
 		for(Map.Entry<Integer, Integer> entry : deckCardMap.entrySet())
 		{
