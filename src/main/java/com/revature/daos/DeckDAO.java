@@ -26,6 +26,12 @@ public class DeckDAO {
 			deckMap.put(deck.getDeckID(), deck);
 	}
 	
+	public void removeFromDeckMap(Deck deck)
+	{
+		if(deckMap.containsKey(deck.getDeckID()))
+			deckMap.remove(deck.getDeckID());
+	}
+	
 	private void initializeDecks()
 	{
 		System.out.println("Deck database being initialized");

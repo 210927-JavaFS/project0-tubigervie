@@ -37,6 +37,7 @@ public class StandardUserInventoryMenuController {
 					inInventory = false;
 					break;
 				default:
+					System.out.println("Invalid input. Try again.");
 					break;
 			}
 		}

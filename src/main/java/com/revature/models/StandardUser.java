@@ -38,4 +38,9 @@ public class StandardUser extends User
 	{
 		this.decks.add(deckID);
 	}
+	
+	public void removeDeck(int deckID)
+	{
+		this.decks.remove(deckID);
+	}
 }

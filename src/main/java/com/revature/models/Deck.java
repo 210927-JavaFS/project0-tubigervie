@@ -68,6 +68,7 @@ public class Deck {
 			deckMap.put(card.index, deckMap.get(card.index) - 1);
 		if(deckMap.get(card.index) == 0)
 			deckMap.remove(card.index);
+		currentCardCount--;
 	}
 	
 	@Override

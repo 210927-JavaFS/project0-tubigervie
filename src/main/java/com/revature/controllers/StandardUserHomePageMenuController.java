@@ -13,7 +13,6 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 {
 
 	private StandardUserService standardUserService = new StandardUserService();
-	private CardService cardService = new CardService();
 	
 	@Override
 	public boolean enterHomePage(User user) {
@@ -32,10 +31,12 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 				case "inventory": //open InventoryMenuController
 					StandardUserInventoryMenuController inventory = new StandardUserInventoryMenuController();
 					inventory.enterInventoryPage(standardUser);
+					System.out.println();
 					break;
 				case "decks": //open DeckMenuController
 					StandardUserDeckMenuController decks = new StandardUserDeckMenuController();
 					decks.enterDeckPage(standardUser);
+					System.out.println();
 					break;
 				case "add":
 					HashMap<Integer, Card> cardMap = CardService.getAllCards(); //test case - to be moved into search
@@ -45,7 +46,7 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 					}
 					while(true)
 					{
-						System.out.println("Type in the number of the card you would like to add to your inventory.");
+						System.out.println("\nType in the number of the card you would like to add to your inventory.");
 						String response2 = scan.nextLine().trim();
 						try {
 							int number = Integer.parseInt(response2);
@@ -54,7 +55,7 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 								continue;
 							}
 							standardUserService.addCardToInventory(standardUser, number);
-							System.out.println("Added \"" + cardMap.get(number).getName() + "\" to your inventory!");
+							System.out.println("Added \"" + cardMap.get(number).getName() + "\" to your inventory!\n");
 							break;
 						}
 						catch(NumberFormatException e){
