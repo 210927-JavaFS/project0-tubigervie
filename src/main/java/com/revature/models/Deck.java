@@ -20,12 +20,17 @@ public class Deck {
 		this.currentCardCount = 0;
 	}
 	
-	public Deck(int deckID, String name, int cardCount, HashMap<Integer, Integer> map) 
+	public Deck(int deckID, int cardCount, String name, HashMap<Integer, Integer> map) 
 	{
 		this.deckID = deckID;
 		this.name = name;
 		this.currentCardCount = cardCount;
 		this.deckMap = map;
+	}
+	
+	public HashMap<Integer, Integer> getDeckMap() 
+	{
+		return deckMap;
 	}
 	
 	public int getDeckID()
@@ -68,6 +73,6 @@ public class Deck {
 	@Override
 	public String toString()
 	{
-		return String.format("%s %d/%d\n", name, currentCardCount, MAX_CARDS);
+		return String.format("%s (%d/%d)", name, currentCardCount, MAX_CARDS);
 	}
 }

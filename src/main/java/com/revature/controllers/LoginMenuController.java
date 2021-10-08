@@ -17,7 +17,7 @@ public class LoginMenuController {
 	public User getUser()
 	{
 		System.out.println("Are you logging in or creating a new account? Type login/register/quit");
-		String response = scan.nextLine();
+		String response = (scan.nextLine()).trim();
 		switch(response) {
 			case "login":
 				System.out.println("Enter your username: ");

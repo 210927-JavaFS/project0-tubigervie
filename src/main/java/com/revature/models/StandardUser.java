@@ -5,45 +5,37 @@ import java.util.ArrayList;
 
 public class StandardUser extends User
 {
-	private ArrayList<Card> inventory = new ArrayList<Card>();
+	private ArrayList<Integer> inventory = new ArrayList<Integer>();
 	
-	private ArrayList<Deck> decks = new ArrayList<Deck>();
+	private ArrayList<Integer> decks = new ArrayList<Integer>();
 	
 	public StandardUser(String username, String password) {
 		super(username, password);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public StandardUser(String username, String password, ArrayList<Card> inventory) {
+	public StandardUser(String username, String password, ArrayList<Integer> inventory) {
 		super(username, password);
 		this.inventory = inventory;
 	}
 	
-	public ArrayList<Card> getInventory()
+	public ArrayList<Integer> getInventory()
 	{
 		return this.inventory;
 	}
 	
-	public ArrayList<Deck> getDecks()
+	public ArrayList<Integer> getDecks()
 	{
 		return this.decks;
 	}
 	
-	public void addToInventory(Card card)
+	public void addToInventory(int cardID)
 	{
-		this.inventory.add(card);
+		this.inventory.add(cardID);
 	}
 	
-	public Deck createNewDeck(String deckName)
+	public void addToDecks(int deckID)
 	{
-		Deck newDeck = new Deck(deckName);
-		decks.add(newDeck);
-		return newDeck;
-	}
-	
-	public void addToDeck(Deck deck, Card card)
-	{
-		if(!deck.isFull())
-			deck.addCard(card);
+		this.decks.add(deckID);
 	}
 }

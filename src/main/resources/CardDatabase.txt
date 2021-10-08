@@ -1,3 +1,5 @@
-id,name,manacost,description,rarity,cardtype
-1,Abomination,5,Taunt. Deathrattle:Deal 2 damage to all characters,rare,minion
-2,Abusive Sergeant,1,Battlecry: Give a minnion +2 attack this turn.,common,minion
+id;name;manacost;description;rarity;cardtype;classtype
+1;Abomination;5;Taunt. Deathrattle:Deal 2 damage to all characters;rare;minion;neutral
+2;Abusive Sergeant;1;Battlecry: Give a minnion +2 attack this turn.;common;minion;neutral
+3;Acolyte of Pain;3;Whenever this minion takes damage, draw a card.;common;minion;neutral
+4;Adrenaline Rush;1;Draw a card. Combo: Draw 2 cards instead.;epic;spell;warrior

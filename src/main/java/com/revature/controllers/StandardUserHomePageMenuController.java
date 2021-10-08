@@ -6,12 +6,14 @@ import java.util.Map;
 import com.revature.models.Card;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
+import com.revature.services.CardService;
 import com.revature.services.StandardUserService;
 
 public class StandardUserHomePageMenuController extends HomePageMenuController
 {
 
 	private StandardUserService standardUserService = new StandardUserService();
+	private CardService cardService = new CardService();
 	
 	@Override
 	public boolean enterHomePage(User user) {
@@ -22,7 +24,7 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 		{
 			System.out.println("Home - What would you like to do? \n" + "SEARCH | " + "INVENTORY | "
 							+ "DECKS | " + "ADD | " + "LOGOUT | " + "HELP");
-			String response = scan.nextLine();
+			String response = (scan.nextLine()).trim();
 			switch(response.toLowerCase())
 			{
 				case "search": // open SearchMenuController
@@ -36,22 +38,22 @@ public class StandardUserHomePageMenuController extends HomePageMenuController
 					decks.enterDeckPage(standardUser);
 					break;
 				case "add":
-					HashMap<Integer, Card> cardMap = StandardUserService.getAllCards();
+					HashMap<Integer, Card> cardMap = CardService.getAllCards(); //test case - to be moved into search
 					for(Map.Entry<Integer, Card> entry : cardMap.entrySet())
 					{
-						System.out.println(String.format("%d) %s", (int)entry.getKey(), entry.getValue().getName()));
+						System.out.println(String.format("%d) %S", (int)entry.getKey(), entry.getValue().getName()));
 					}
 					while(true)
 					{
 						System.out.println("Type in the number of the card you would like to add to your inventory.");
-						String response2 = scan.nextLine();
+						String response2 = scan.nextLine().trim();
 						try {
 							int number = Integer.parseInt(response2);
 							if(number <= 0 || number > cardMap.size()) {
 								System.out.println("Invalid input. Try again. \n");
 								continue;
 							}
-							standardUserService.addCardToInventory(standardUser, cardMap.get(number));
+							standardUserService.addCardToInventory(standardUser, number);
 							System.out.println("Added \"" + cardMap.get(number).getName() + "\" to your inventory!");
 							break;
 						}

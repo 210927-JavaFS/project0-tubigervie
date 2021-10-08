@@ -5,8 +5,8 @@ public class Minion extends Card {
 	protected int attack;
 	protected int defense;
 	
-	public Minion(int index, String name, int manaCost, String description, RarityType rarity, CardType type, int attack, int defense) {
-		super(index, name, manaCost, description, rarity, type);
+	public Minion(int index, String name, int manaCost, String description, RarityType rarity, CardType type, ClassType classType, int attack, int defense) {
+		super(index, name, manaCost, description, rarity, type, classType);
 		this.attack = attack;
 		this.defense = defense;
 	}

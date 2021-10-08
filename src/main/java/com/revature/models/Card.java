@@ -5,6 +5,7 @@ public class Card {
 	
 	public enum CardType {spell, minion, weapon};
 	public enum RarityType {common, rare, epic, legendary};
+	public enum ClassType {shaman, mage, warrior, rogue, neutral, paladin, hunter, warlock}
 	
 	protected int index;
 	
@@ -13,8 +14,9 @@ public class Card {
 	protected String description;
 	protected RarityType rarity;
 	protected CardType type;
+	protected ClassType classType;
 	
-	public Card(int index, String name, int manaCost, String description, RarityType rarity, CardType type)
+	public Card(int index, String name, int manaCost, String description, RarityType rarity, CardType type, ClassType classType)
 	{
 		this.index = index;
 		this.name = name;
@@ -22,6 +24,7 @@ public class Card {
 		this.description = description;
 		this.rarity = rarity;
 		this.type = type;
+		this.classType = classType;
 	}
 	
 	public int getIndex()
@@ -39,6 +42,21 @@ public class Card {
 		return this.manaCost;
 	}
 	
+	public ClassType getClassType()
+	{
+		return this.classType;
+	}
+	
+	public CardType getCardType()
+	{
+		return this.type;
+	}
+	
+	public RarityType getRarityType()
+	{
+		return this.rarity;
+	}
+	
 	public String getDescription()
 	{
 		return this.description;
@@ -47,6 +65,6 @@ public class Card {
 	@Override
 	public String toString()
 	{
-		return String.format("%s (%d/%d)\nMana Cost: %d\nRarity: %s\nDescription: %s\n", name, index, TOTAL_CARDS, manaCost, rarity.toString(), description);
+		return String.format("\nCard - %S (%d/%d)\nClass - %S\nType - %S\nRarity - %S\nMana Cost - %d\nDescription - %s", name, index, TOTAL_CARDS, classType, type, rarity, manaCost, description);
 	}
 }
