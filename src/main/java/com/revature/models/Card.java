@@ -65,6 +65,7 @@ public class Card {
 	@Override
 	public String toString()
 	{
-		return String.format("\nCard - %S (%d/%d)\nClass - %S\nType - %S\nRarity - %S\nMana Cost - %d\nDescription - %s", name, index, TOTAL_CARDS, classType, type, rarity, manaCost, description);
+		return String.format("\nCard - %S (%d/%d)\nClass - %S\nType - %S\nRarity - %S\nMana Cost - %d\nDescription - %s", 
+				name, index, TOTAL_CARDS, classType, type, rarity, manaCost, (description.isBlank()) ? "NONE" : description);
 	}
 }

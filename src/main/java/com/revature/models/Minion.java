@@ -20,5 +20,12 @@ public class Minion extends Card {
 	{
 		return this.defense;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("\nCard - %S (%d/%d)\nClass - %S\nType - %S\nRarity - %S\nMana Cost - %d\nAttack - %d\nHealth - %d\nDescription - %s", 
+				name, index, TOTAL_CARDS, classType, type, rarity, manaCost, attack, defense, (description.isBlank()) ? "NONE" : description);
+	}
 
 }

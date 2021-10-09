@@ -22,7 +22,7 @@ CREATE TABLE weapons(
 	charges INTEGER NOT NULL
 );
 
-DROP TABLE IF EXISTS minions;
+DROP TABLE IF EXISTS cards CASCADE;
 
 INSERT INTO cards (card_name, mana_cost, description, rarity, card_type, class_type)
 	VALUES('Abomination', 5, 'Taunt. Deathrattle: deal 2 damage to all characters.', 'rare', 'minion', 'neutral'),
@@ -119,8 +119,10 @@ INSERT INTO weapons (card_id, attack, charges)
 
 SELECT c.card_id, c.card_name,
 	c.mana_cost, c.description, c.rarity, c.card_type,
-	c.class_type, m.attack, m.health
-FROM cards c INNER JOIN minions m ON (c.card_id = m.card_id);
+	c.class_type, m.attack, m.health, w.charges
+FROM cards c 
+	FULL JOIN minions m ON (c.card_id = m.card_id)
+	FULL JOIN weapons w ON (c.card_id = w.card_id);
 	
 	
 	

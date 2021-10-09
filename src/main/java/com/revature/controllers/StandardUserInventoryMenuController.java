@@ -6,7 +6,9 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import com.revature.models.Card;
+import com.revature.models.Minion;
 import com.revature.models.StandardUser;
+import com.revature.models.Weapon;
 import com.revature.services.CardService;
 import com.revature.services.StandardUserService;
 
@@ -65,7 +67,19 @@ public class StandardUserInventoryMenuController {
 					System.out.println("Invalid input. Try again. \n");
 					continue;
 				}
-				System.out.println(cardService.findCard(number).toString());
+				Card card = cardService.findCard(number);
+				switch(card.getCardType())
+				{
+					case minion:
+						System.out.println(((Minion)card).toString());
+						break;
+					case weapon:
+						System.out.println(((Weapon)card).toString());
+						break;
+					default:
+						System.out.println(card.toString());
+						break;	
+				}
 				return true;
 			}
 			catch(NumberFormatException e){
