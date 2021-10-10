@@ -2,13 +2,16 @@ package com.revature.controllers;
 
 import java.util.Scanner;
 
+import com.revature.models.StandardUser;
 import com.revature.models.User;
+import com.revature.services.LoginService;
 import com.revature.services.StandardUserService;
 
 public class LoginMenuController {
 	private boolean applicationIsRunning = true;
 	private static Scanner scan = new Scanner(System.in);
 	private StandardUserService userService = new StandardUserService();
+	private LoginService loginService = new LoginService();
 	
 	public boolean getApplicationStatus() {
 		return applicationIsRunning;
@@ -21,11 +24,21 @@ public class LoginMenuController {
 		switch(response) {
 			case "login":
 				System.out.println("Enter your username: ");
-				String username = scan.nextLine();
+				String username = scan.nextLine().toLowerCase();
 				System.out.println("Enter your password: ");
 				String password = scan.nextLine();
-				User user = userService.createNewUser(username, password);
 				System.out.println("Now logging in...\n");
+				User user = loginService.retrieveExistingLogin(username, password);
+				if(user == null) {
+					System.out.println("creating new account");
+					user = userService.createNewUser(username, password);
+					loginService.uploadNewLogin(user);
+					userService.registerAccountInfo(user);
+				}
+				else {
+					System.out.println("loading account info from database...");
+					userService.loadInventory((StandardUser)user);	
+				}
 				return user;
 			case "register":
 				return null;

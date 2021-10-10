@@ -4,28 +4,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import com.revature.daos.StandardUserDAO;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
+import com.revature.models.User.AccountType;
 
-public class StandardUserService extends UserService{
-
+public class StandardUserService extends UserService
+{
+	private static StandardUserDAO userDAO = new StandardUserDAO();
+	
 	public User createNewUser(String username, String password) {
-		return new StandardUser(username, password);
+		return new StandardUser(username, password, AccountType.standard);
 	}
 	
 	public void addCardToInventory(StandardUser user, int cardID) 
 	{
 		user.addToInventory(cardID);
+		updateAccountInfo(user);
 	}
 	
 	public void addToDecks(StandardUser user, int deckID)
 	{
 		user.addToDecks(deckID);
+		updateAccountInfo(user);
 	}
 	
 	public void removeDeck(StandardUser user, int deckID)
 	{
 		user.removeDeck(deckID);
+		updateAccountInfo(user);
 	}
 	
 	public ArrayList<Integer> getDecks(StandardUser user)
@@ -57,5 +64,20 @@ public class StandardUserService extends UserService{
 	{
 		TreeMap<Integer, Integer> sortedMap = new TreeMap<Integer, Integer>(inventoryMap);
 		return sortedMap;
+	}
+	
+	public void loadInventory(StandardUser user)
+	{
+		userDAO.load(user);
+	}
+	
+	public void updateAccountInfo(User user)
+	{
+		userDAO.updateUser(user);
+	}
+	
+	public void registerAccountInfo(User user)
+	{
+		userDAO.addUser(user);
 	}
 }

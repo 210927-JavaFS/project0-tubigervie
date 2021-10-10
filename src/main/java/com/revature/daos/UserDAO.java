@@ -6,7 +6,7 @@ import com.revature.models.User;
 
 public interface UserDAO {
 	
-	public ArrayList<User> getAll();
+	//public ArrayList<User> getAll();
 	
 	public User findUser(int id);
 	

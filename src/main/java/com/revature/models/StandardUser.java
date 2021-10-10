@@ -9,13 +9,13 @@ public class StandardUser extends User
 	
 	private ArrayList<Integer> decks = new ArrayList<Integer>();
 	
-	public StandardUser(String username, String password) {
-		super(username, password);
+	public StandardUser(String username, String password, AccountType type) {
+		super(username, password, type);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public StandardUser(String username, String password, ArrayList<Integer> inventory) {
-		super(username, password);
+	public StandardUser(String username, String password, AccountType type, ArrayList<Integer> inventory) {
+		super(username, password, type);
 		this.inventory = inventory;
 	}
 	
@@ -42,5 +42,15 @@ public class StandardUser extends User
 	public void removeDeck(int deckID)
 	{
 		this.decks.remove(deckID);
+	}
+	
+	public void setInventory(ArrayList<Integer> newInv)
+	{
+		this.inventory = newInv;
+	}
+	
+	public void setDeckList(ArrayList<Integer> newDecks)
+	{
+		this.decks = newDecks;
 	}
 }
