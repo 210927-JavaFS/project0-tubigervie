@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import com.revature.daos.DeckDAO;
 import com.revature.daos.StandardUserDAO;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
@@ -12,6 +13,7 @@ import com.revature.models.User.AccountType;
 public class StandardUserService extends UserService
 {
 	private static StandardUserDAO userDAO = new StandardUserDAO();
+	private static DeckDAO deckDAO = new DeckDAO();
 	
 	public User createNewUser(String username, String password) {
 		return new StandardUser(username, password, AccountType.standard);
@@ -69,15 +71,11 @@ public class StandardUserService extends UserService
 	public void loadInventory(StandardUser user)
 	{
 		userDAO.load(user);
+		deckDAO.loadDecks(user);
 	}
 	
 	public void updateAccountInfo(User user)
 	{
 		userDAO.updateUser(user);
-	}
-	
-	public void registerAccountInfo(User user)
-	{
-		userDAO.addUser(user);
 	}
 }

@@ -30,7 +30,6 @@ public class CardDAO {
 	
 	private void initializeCards()
 	{
-		System.out.println("Card database being initialized");
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"

@@ -1,6 +1,8 @@
 package com.revature.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Deck {
 	static final int MAX_CARDS = 20;
@@ -14,8 +16,7 @@ public class Deck {
 	
 	public Deck(String name) 
 	{
-		this.deckID = deckIDCounter; // test value
-		deckIDCounter++; //testing
+		this.deckID = deckIDCounter;
 		this.name = name;
 		this.currentCardCount = 0;
 	}
@@ -31,6 +32,17 @@ public class Deck {
 	public HashMap<Integer, Integer> getDeckMap() 
 	{
 		return deckMap;
+	}
+	
+	public ArrayList<Integer> createDeckArray()
+	{
+		ArrayList<Integer> deckArray = new ArrayList<Integer>();
+		for(Map.Entry<Integer, Integer> entry : deckMap.entrySet())
+		{
+			for(int i = 0; i < entry.getValue(); i++)
+				deckArray.add(entry.getKey());
+		}
+		return deckArray;
 	}
 	
 	public int getDeckID()
@@ -55,6 +67,11 @@ public class Deck {
 		else
 			deckMap.put(card.index, 1);
 		currentCardCount++;
+	}
+	
+	public void setID(int id)
+	{
+		this.deckID = id;
 	}
 	
 	public boolean isFull()

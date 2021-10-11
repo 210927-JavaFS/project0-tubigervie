@@ -7,14 +7,17 @@ import java.util.TreeMap;
 import com.revature.daos.DeckDAO;
 import com.revature.models.Card;
 import com.revature.models.Deck;
+import com.revature.models.StandardUser;
 
 public class DeckService 
 {
 	private static DeckDAO deckDAO = new DeckDAO();
 	
-	public Deck createNewDeck(String deckName)
+	public Deck createNewDeck(String deckName, StandardUser user)
 	{
-		Deck newDeck = new Deck(deckName);
+		Deck deckTemplate = new Deck(deckName);
+		deckDAO.uploadDeck(user, deckTemplate);
+		Deck newDeck = deckDAO.findExistingDeck(deckTemplate.getName());
 		deckDAO.addToDeckMap(newDeck);
 		return newDeck;
 	}
@@ -23,22 +26,25 @@ public class DeckService
 	{
 		if(!deck.isFull())
 			deck.addCard(card);
+		deckDAO.updateDeck(deck);
 	}
 	
 	public void removeFromDeck(Deck deck, Card card)
 	{
 		deck.removeCard(card);
+		deckDAO.updateDeck(deck);
 	}
 	
 	public Deck getDeck(int id)
 	{
-		return deckDAO.findDeck(id);
+		return deckDAO.findExistingDeck(id);
 	}
 	
 	public void deleteDeck(Deck deck)
 	{
 		if(deckDAO.deckMap.containsKey(deck.getDeckID()))
 			deckDAO.removeFromDeckMap(deck);
+		deckDAO.deleteDeck(deck);
 	}
 	
 	public HashMap<Integer, Integer> createDeckMapCopy(Deck deck)

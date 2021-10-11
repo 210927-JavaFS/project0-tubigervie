@@ -58,7 +58,6 @@ public class LoginDAO
 			
 			if(result.next())
 			{
-				System.out.println("successfully found information from database");
 				switch(AccountType.valueOf(result.getString("acc_type"))) 
 				{
 				case admin:

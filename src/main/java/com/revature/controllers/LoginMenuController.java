@@ -33,7 +33,7 @@ public class LoginMenuController {
 					System.out.println("creating new account");
 					user = userService.createNewUser(username, password);
 					loginService.uploadNewLogin(user);
-					userService.registerAccountInfo(user);
+					//userService.registerAccountInfo(user);
 				}
 				else {
 					System.out.println("loading account info from database...");

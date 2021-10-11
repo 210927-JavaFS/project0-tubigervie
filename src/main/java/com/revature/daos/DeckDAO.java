@@ -1,24 +1,18 @@
 package com.revature.daos;
 
-import java.io.File;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import com.revature.models.Deck;
+import com.revature.models.StandardUser;
+import com.revature.utils.ConnectionUtil;
 
 public class DeckDAO {
-	public HashMap<Integer, Deck> deckMap;
-	
-	public DeckDAO() 
-	{
-		if(deckMap == null)
-			initializeDecks();
-	}
-	
-	public Deck findDeck(int id) {
-		return (deckMap.containsKey(id)) ? deckMap.get(id) : null;
-	}
+	public HashMap<Integer, Deck> deckMap = new HashMap<Integer, Deck>();
 	
 	public void addToDeckMap(Deck deck)
 	{
@@ -32,45 +26,232 @@ public class DeckDAO {
 			deckMap.remove(deck.getDeckID());
 	}
 	
-	private void initializeDecks()
+	public boolean uploadDeck(StandardUser user, Deck deck)
 	{
-		System.out.println("Deck database being initialized");
-		deckMap = new HashMap<Integer, Deck>();
-		try 
+		try(Connection conn = ConnectionUtil.getConnection())
 		{
-			Scanner scan = new Scanner(new File("C:\\Users\\ervie\\Documents\\Work Stuff\\Repos\\project0-tubigervie\\src\\main\\resources\\DeckDatabase.txt"));
-			scan.nextLine();
-			while(scan.hasNextLine())
+			String sql = "INSERT INTO decks (user_id, deck_name, card_list, card_count)"
+							+ "VALUES (?, ?, ?, ?)";
+			int count = 0;
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(++count, user.getUserID());
+			statement.setString(++count, deck.getName());
+			
+			StringBuilder cards = new StringBuilder();
+			ArrayList<Integer> deckArray = deck.createDeckArray();
+			for(int i = 0; i < deckArray.size(); i++)
 			{
-				String deckString = scan.nextLine();
-				String[] deckArray = deckString.split(";");
-				String[] cardArray = deckArray[3].split(",");
-				HashMap<Integer, Integer> cardMap = new HashMap<Integer, Integer>();
-				for(String cardIDString : cardArray) {
-					try {
-						int cardID = Integer.parseInt(cardIDString);
-						if(!cardMap.containsKey(cardID))
-							cardMap.put(cardID, 1);
+				if(i == deckArray.size() - 1) 
+					cards.append(deckArray.get(i));
+				else
+					cards.append(deckArray.get(i)+",");
+			}	
+			statement.setString(++count, cards.toString());
+			statement.setInt(++count, deck.getCardCount());
+			
+			statement.execute();
+			
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public Deck findExistingDeck(String deck_name)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * from decks WHERE deck_name = ?";
+			
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(++count, deck_name);
+			
+			statement.execute();
+			
+			ResultSet result = statement.executeQuery();
+			
+			Deck newDeck = null;
+			
+			HashMap<Integer, Integer> deckCardMap = new HashMap<Integer, Integer>();
+			if(result.next())
+			{
+				String deckString = result.getString("card_list");
+				
+				if(deckString != null && !deckString.isBlank()) 
+				{
+					String[] deckParts = deckString.split(",");
+					
+					for(String cardID : deckParts)
+					{
+						Integer id = Integer.valueOf(cardID);
+						if(deckCardMap.containsKey(id))
+							deckCardMap.put(id, (deckCardMap.get(id)) + 1);
 						else
-							cardMap.put(cardID, cardMap.get(cardID) + 1);
+							deckCardMap.put(id, 1);
 					}
-					catch(NumberFormatException e){
-						System.out.println("Invalid card ID parsing. Check database.");
-						continue;
-					}
-				}				
-				Deck deck = new Deck(Integer.valueOf(cardArray[0]), Integer.valueOf(cardArray[1]), cardArray[2], cardMap);
-				if(!deckMap.containsKey(deck.getDeckID()))
-					deckMap.put(deck.getDeckID(), deck);
+				}
 			}
+			newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
+			return newDeck;
 		}
-		catch(IOException e)
+		catch(SQLException e)
 		{
-			System.out.println("Could not open decks file.");
+			e.printStackTrace();
 		}
-		catch(NumberFormatException e)
+		return null;
+	}
+	
+	public Deck findExistingDeck(int deck_id) {
+		try(Connection conn = ConnectionUtil.getConnection())
 		{
-			System.out.println("Deck in deck database not properly formatted.");
+			String sql = "SELECT * from decks WHERE deck_id = ?";
+			
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(++count, deck_id);
+			
+			statement.execute();
+			
+			ResultSet result = statement.executeQuery();
+			
+			Deck newDeck = null;
+			
+			HashMap<Integer, Integer> deckCardMap = new HashMap<Integer, Integer>();
+			if(result.next())
+			{
+				String deckString = result.getString("card_list");
+				
+				if(deckString != null && !deckString.isBlank()) 
+				{
+					String[] deckParts = deckString.split(",");
+					
+					for(String cardID : deckParts)
+					{
+						Integer id = Integer.valueOf(cardID);
+						if(deckCardMap.containsKey(id))
+							deckCardMap.put(id, (deckCardMap.get(id)) + 1);
+						else
+							deckCardMap.put(id, 1);
+					}
+				}
+			}
+			newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
+			return newDeck;
 		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public boolean updateDeck(Deck deck)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "UPDATE decks SET card_list = ?, card_count = ? WHERE deck_id = ?";
+			
+			int count = 0;
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			StringBuilder cards = new StringBuilder();
+			ArrayList<Integer> deckArray = deck.createDeckArray();
+			for(int i = 0; i < deckArray.size(); i++)
+			{
+				if(i == deckArray.size() - 1) 
+					cards.append(deckArray.get(i));
+				else
+					cards.append(deckArray.get(i)+",");
+			}	
+			statement.setString(++count, cards.toString());
+			statement.setInt(++count, deck.getCardCount());
+			statement.setInt(++count, deck.getDeckID());
+			
+			statement.execute();			
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean deleteDeck(Deck deck)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "DELETE FROM decks WHERE deck_id = ?";
+			
+			int count = 0;
+			PreparedStatement statement = conn.prepareStatement(sql);
+		
+			statement.setInt(++count, deck.getDeckID());
+			statement.execute();			
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean loadDecks(StandardUser user)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			HashMap<Integer, Integer> deckCardMap = new HashMap<Integer, Integer>();
+			for(Integer deckID : user.getDecks())
+			{
+				String sql = "SELECT * from decks WHERE deck_id = ?";
+				
+				int count = 0;
+				
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				statement.setInt(++count, deckID);
+				statement.execute();
+				
+				ResultSet result = statement.executeQuery();
+				Deck newDeck = null;
+				if(result.next())
+				{
+					String deckString = result.getString("card_list");
+					
+					if(deckString != null && !deckString.isBlank()) 
+					{
+						String[] deckParts = deckString.split(",");
+						
+						for(String cardID : deckParts)
+						{
+							Integer id = Integer.valueOf(cardID);
+							if(deckCardMap.containsKey(id))
+								deckCardMap.put(id, (deckCardMap.get(id)) + 1);
+							else
+								deckCardMap.put(id, 1);
+						}
+					}	
+					newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
+					newDeck.setID(findExistingDeck(newDeck.getName()).getDeckID());
+					deckMap.put(newDeck.getDeckID(), newDeck);
+				}	
+			}
+				
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

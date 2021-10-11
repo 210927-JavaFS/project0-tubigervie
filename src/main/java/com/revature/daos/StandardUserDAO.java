@@ -22,6 +22,7 @@ public class StandardUserDAO implements UserDAO
 	@Override
 	public boolean addUser(User user)
 	{
+		/*System.out.println("should not be called");
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "INSERT INTO standard_users (user_id, inventory, decks)"
@@ -59,7 +60,7 @@ public class StandardUserDAO implements UserDAO
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		return false;
 	}
 	
@@ -122,12 +123,10 @@ public class StandardUserDAO implements UserDAO
 			
 			if(result.next())
 			{
-				System.out.println("successfully found information from database");
-				
 				String inventoryString = result.getString("inventory");
 				ArrayList<Integer> inventory = new ArrayList<Integer>();
 				
-				if(!inventoryString.isBlank()) 
+				if(inventoryString != null && !inventoryString.isBlank()) 
 				{
 					String[] inventoryParts = inventoryString.split(",");
 					
@@ -141,13 +140,12 @@ public class StandardUserDAO implements UserDAO
 				String deckString = result.getString("decks");
 				ArrayList<Integer> decks = new ArrayList<Integer>();
 				
-				if(!deckString.isBlank()) 
+				if(deckString != null && !deckString.isBlank()) 
 				{
-					String[] deckParts = deckString.split(",");
-					
-					for(String deckID : deckParts)
-						inventory.add(Integer.valueOf(deckID));
-				
+					String[] deckParts = deckString.split(",");					
+					for(String deckID : deckParts) {
+						decks.add(Integer.valueOf(deckID));
+					}				
 					user.setDeckList(decks);
 				}				
 			}		

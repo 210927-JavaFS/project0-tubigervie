@@ -239,7 +239,7 @@ public class StandardUserDeckMenuController {
 	{
 		System.out.println("\nWhat would you like to name the deck?");
 		String deckName = scan.nextLine().trim();
-		Deck newDeck = deckService.createNewDeck(deckName);
+		Deck newDeck = deckService.createNewDeck(deckName, user);
 		standardUserService.addToDecks(user, newDeck.getDeckID());
 		while(true) {
 			System.out.println("\nDeck has been created. Would you like to add cards from your inventory into the deck? Y/N");
@@ -299,7 +299,10 @@ public class StandardUserDeckMenuController {
 		if(deckCount > 0) 
 		{
 			for(int i = 0; i < deckCount; i++)
+			{
 				System.out.println(String.format("%d) %s", i + 1, deckService.getDeck(decks.get(i)).getName()));
+			}
+
 		}
 	}
 	

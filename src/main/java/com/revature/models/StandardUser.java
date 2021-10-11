@@ -41,7 +41,7 @@ public class StandardUser extends User
 	
 	public void removeDeck(int deckID)
 	{
-		this.decks.remove(deckID);
+		this.decks.remove((Integer)deckID);
 	}
 	
 	public void setInventory(ArrayList<Integer> newInv)
