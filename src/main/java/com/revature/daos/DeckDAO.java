@@ -108,6 +108,8 @@ public class DeckDAO {
 	}
 	
 	public Deck findExistingDeck(int deck_id) {
+		if(deckMap.containsKey(deck_id) && deckMap.get(deck_id) != null)
+			return deckMap.get(deck_id);
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT * from decks WHERE deck_id = ?";
@@ -144,6 +146,7 @@ public class DeckDAO {
 				}
 			}
 			newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
+			deckMap.put(newDeck.getDeckID(), newDeck);
 			return newDeck;
 		}
 		catch(SQLException e)

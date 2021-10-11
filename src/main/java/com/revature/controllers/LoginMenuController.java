@@ -36,7 +36,6 @@ public class LoginMenuController {
 					//userService.registerAccountInfo(user);
 				}
 				else {
-					System.out.println("loading account info from database...");
 					userService.loadInventory((StandardUser)user);	
 				}
 				return user;

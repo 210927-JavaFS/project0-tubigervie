@@ -24,9 +24,11 @@ public class DeckService
 	
 	public void addToDeck(Deck deck, Card card)
 	{
-		if(!deck.isFull())
+		if(!deck.isFull()) 
+		{
 			deck.addCard(card);
-		deckDAO.updateDeck(deck);
+			deckDAO.updateDeck(deck);	
+		}
 	}
 	
 	public void removeFromDeck(Deck deck, Card card)

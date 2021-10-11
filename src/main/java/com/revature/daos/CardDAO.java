@@ -1,9 +1,11 @@
 package com.revature.daos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.revature.models.Card;
@@ -26,6 +28,141 @@ public class CardDAO {
 	
 	public Card findCard(int id) {
 		return (cardMap.containsKey(id)) ? cardMap.get(id) : null;
+	}
+	
+	public ArrayList<Card> findCardsByType(CardType c_type)
+	{
+		ArrayList<Card> cardList = new ArrayList<Card>();
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT c.card_id, c.card_name,\r\n"
+					+ "	c.mana_cost, c.description, c.rarity, c.card_type,\r\n"
+					+ "	c.class_type, m.attack, m.health, w.charges\r\n"
+					+ "FROM cards c \r\n"
+					+ "	FULL JOIN minions m ON (c.card_id = m.card_id)\r\n"
+					+ "	FULL JOIN weapons w ON (c.card_id = w.card_id)\r\n"
+					+ " WHERE c.card_type = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			int count = 0;
+			statement.setString(++count, c_type.toString());
+			ResultSet result = statement.executeQuery();
+			while(result.next())
+			{
+				Card card;
+				CardType cardType = CardType.valueOf(result.getString("card_type"));
+				switch(cardType) {
+				case minion:
+					card = new Minion(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")), 
+							result.getInt("attack"), 
+							result.getInt("health"));
+					break;
+				case weapon:
+					card = new Weapon(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")), 
+							result.getInt("attack"), 
+							result.getInt("charges"));
+					break;
+				default:
+					card = new Card(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")));
+					break;		
+				}
+				if(card != null && !cardMap.containsKey(card.getIndex()))
+					cardMap.put(card.getIndex(), card);
+				cardList.add(card);
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Could not connect to database instance.");
+		}
+		return cardList;
+	}
+	
+	public Card findCard(String name)
+	{
+		Card card = null;
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT c.card_id, c.card_name,\r\n"
+					+ "	c.mana_cost, c.description, c.rarity, c.card_type,\r\n"
+					+ "	c.class_type, m.attack, m.health, w.charges\r\n"
+					+ "FROM cards c \r\n"
+					+ "	FULL JOIN minions m ON (c.card_id = m.card_id)\r\n"
+					+ "	FULL JOIN weapons w ON (c.card_id = w.card_id)\r\n"
+					+ " WHERE LOWER(c.card_name) = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			int count = 0;
+			statement.setString(++count, name);
+			ResultSet result = statement.executeQuery();
+			while(result.next())
+			{
+				CardType cardType = CardType.valueOf(result.getString("card_type"));
+				switch(cardType) {
+				case minion:
+					card = new Minion(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")), 
+							result.getInt("attack"), 
+							result.getInt("health"));
+					break;
+				case weapon:
+					card = new Weapon(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")), 
+							result.getInt("attack"), 
+							result.getInt("charges"));
+					break;
+				default:
+					card = new Card(
+							result.getInt("card_id"),
+							result.getString("card_name"),
+							result.getInt("mana_cost"),
+							result.getString("description"),
+							RarityType.valueOf(result.getString("rarity")),
+							CardType.valueOf(result.getString("card_type")),
+							ClassType.valueOf(result.getString("class_type")));
+					break;		
+				}
+				
+				if(card != null && !cardMap.containsKey(card.getIndex()))
+					cardMap.put(card.getIndex(), card);
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Could not connect to database instance.");
+		}
+		return card;
 	}
 	
 	private void initializeCards()

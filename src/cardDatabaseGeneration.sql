@@ -123,6 +123,6 @@ SELECT c.card_id, c.card_name,
 FROM cards c 
 	FULL JOIN minions m ON (c.card_id = m.card_id)
 	FULL JOIN weapons w ON (c.card_id = w.card_id);
-	
+	--WHERE LOWER(c.card_name) = 'boar';
 	
 	
