@@ -1,11 +1,13 @@
 package com.revature.controllers;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import com.revature.models.StandardUser;
 import com.revature.models.User;
 import com.revature.services.LoginService;
 import com.revature.services.StandardUserService;
+import com.revature.utils.CryptoUtils;
 
 public class LoginMenuController {
 	private boolean applicationIsRunning = true;
@@ -28,6 +30,15 @@ public class LoginMenuController {
 				System.out.println("Enter your password: ");
 				String password = scan.nextLine();
 				System.out.println("Now logging in...\n");
+				try 
+				{
+					byte[] sha = CryptoUtils.getSHA(password);
+					password = CryptoUtils.Encrypt(sha);
+				} catch (NoSuchAlgorithmException e) {
+					System.out.println("Could not encrypt password");
+					e.printStackTrace();
+				}
+					
 				User user = loginService.retrieveExistingLogin(username, password);
 				if(user == null) {
 					System.out.println("creating new account");

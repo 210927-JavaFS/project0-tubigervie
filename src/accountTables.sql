@@ -1,7 +1,7 @@
 CREATE TABLE logins (
 	user_id SERIAL PRIMARY KEY,
 	user_name VARCHAR(50) NOT NULL,
-	user_pass VARCHAR(50) NOT NULL,
+	user_pass VARCHAR(70) NOT NULL,
 	acc_type VARCHAR(20) NOT NULL
 );
 
@@ -19,7 +19,6 @@ CREATE TABLE decks(
 	card_count INTEGER
 );
 
-DROP TABLE IF EXISTS decks;
 
 CREATE OR REPLACE FUNCTION populate_standard_users() RETURNS TRIGGER AS 
 $BODY$
@@ -33,6 +32,8 @@ END
 $BODY$
 LANGUAGE plpgsql;
 
+DROP TABLE IF EXISTS logins;
+
 CREATE TRIGGER populate_standard_users AFTER INSERT ON logins
 		FOR EACH ROW 
 		EXECUTE PROCEDURE populate_standard_users();
@@ -43,4 +44,4 @@ INSERT INTO logins(user_name, user_pass, acc_type)
 INSERT INTO logins(user_name, user_pass, acc_type)
 	VALUES('adminlog', 'adminpass', 'admin');
 	
-TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
+TRUNCATE TABLE logins RESTART IDENTITY CASCADE;

@@ -1,6 +1,4 @@
-package com.revature.controllers;
-
-import java.util.ArrayList;
+package com.revature.controllers;`	 java.util.ArrayList;
 
 import com.revature.models.Card;
 import com.revature.models.Minion;
