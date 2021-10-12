@@ -41,7 +41,7 @@ public class StandardUserInventoryMenuController {
 					inInventory = false;
 					break;
 				default:
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					break;
 			}
 		}
@@ -59,12 +59,13 @@ public class StandardUserInventoryMenuController {
 				System.out.println(String.format("%d) %s x%d", card.getIndex(), card.getName(), entry.getValue()));
 			}
 			
-			System.out.println("\nType in the number of the card you would like to examine.");
+			System.out.println("\nType in the number ID of the card you would like to examine or type RETURN.");
 			String response2 = scan.nextLine().trim();
 			try {
+				if(response2.equals("return")) return true;
 				int number = Integer.parseInt(response2);
 				if(!inventoryMap.containsKey(number)) {
-					System.out.println("Invalid input. Try again. \n");
+					System.out.println("\nInvalid input. Try again. \n");
 					continue;
 				}
 				Card card = cardService.findCard(number);
@@ -83,7 +84,7 @@ public class StandardUserInventoryMenuController {
 				return true;
 			}
 			catch(NumberFormatException e){
-				System.out.println("Invalid input. Try again. \n");
+				System.out.println("\nInvalid input. Try again. \n");
 				continue;
 			}
 		}

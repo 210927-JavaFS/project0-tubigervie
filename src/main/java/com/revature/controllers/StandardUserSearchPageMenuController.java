@@ -1,4 +1,7 @@
-package com.revature.controllers;`	 java.util.ArrayList;
+package com.revature.controllers; 
+
+
+import java.util.ArrayList;
 
 import com.revature.models.Card;
 import com.revature.models.Minion;
@@ -18,7 +21,7 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 	{
 		boolean inSearch = true;
 		while(inSearch) {
-			System.out.println("\nSearch - What would you like to search up? \n" + "CARD | " + "RETURN");
+			System.out.println("\nSearch - What would you like to search? \n" + "CARD | " + "RETURN");
 			String response = scan.nextLine().trim();
 			switch(response.toLowerCase())
 			{
@@ -29,7 +32,7 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 					inSearch = false;
 					break;
 				default:
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					break;
 			}
 		}
@@ -48,19 +51,41 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 				case "name":
 					while(true)
 					{
-						System.out.println("\nEnter the name of the card you would like to look up or type RETURN when done.");
+						System.out.println("\nEnter the name of the card you would like to look up or type R to return.");
 						String search = scan.nextLine().trim().toLowerCase();
-						if(search.equals("return")) break;
-						Card foundCard = cardService.findCard(search);
-						if(foundCard != null)
+						if(search.equals("r")) break;
+						ArrayList<Card> foundCards = cardService.findCard(search);
+						if(foundCards != null && foundCards.size() != 0)
 						{
-							enterCardView(foundCard, (StandardUser)user);
+							foundCards.sort((c1, c2) -> ((Integer)c1.getIndex()).compareTo((Integer)c2.getIndex()));
 							inCardSearch = false;
+							while(true)
+							{
+								System.out.println();
+								for(int i = 0; i < foundCards.size(); i++)
+								{
+									Card card = foundCards.get(i);
+									System.out.println(String.format("%d) %s", i + 1, card.getName()));
+								}
+								System.out.println("\nType in the number of the card you would like to examine or type RETURN.");
+								String response2 = scan.nextLine().trim();
+								try {
+									if(response2.equals("return")) break;
+									int number = Integer.parseInt(response2);
+									Card card = foundCards.get(number - 1);
+									enterCardView(card, (StandardUser) user);
+									break;
+								}
+								catch(NumberFormatException | IndexOutOfBoundsException e){
+									System.out.println("\nInvalid input. Try again.");
+									continue;
+								}
+							}
 						}
 						else 
-							System.out.println("\nCould not find card from database. Make sure card name is spelled exactly correct.\n");
+							System.out.println("\nCould not find any results.");
 					}
-					break;
+					continue;
 				case "return":
 					inCardSearch = false;
 					break;
@@ -86,27 +111,31 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 								System.out.println("Invalid input. Try again.");
 								continue;
 						}
-						if(cards != null) cards.sort((c1, c2) -> ((Integer)c1.getIndex()).compareTo((Integer)c2.getIndex()));
+						if(cards != null) 
+							cards.sort((c1, c2) -> ((Integer)c1.getIndex()).compareTo((Integer)c2.getIndex()));
 						while(true)
 						{
 							System.out.println();
-							for(Card card : cards)
-								System.out.println(String.format("%d) %s", card.getIndex(), card.getName()));
-							System.out.println("\nType in the number of the card you would like to examine.");
+							for(int i = 0; i < cards.size(); i++)
+							{
+								Card card = cards.get(i);
+								System.out.println(String.format("%d) %s", i + 1, card.getName()));
+							}
+							System.out.println("\nType in the number of the card you would like to examine or type RETURN.");
 							String response2 = scan.nextLine().trim();
 							try {
+								if(response2.equals("return")) break;
 								int number = Integer.parseInt(response2);
-								Card card = cardService.findCard(number);
+								Card card = cards.get(number - 1);
 								enterCardView(card, (StandardUser) user);
-								inCardSearch = false;
 								break;
 							}
-							catch(NumberFormatException e){
+							catch(NumberFormatException | IndexOutOfBoundsException e){
 								System.out.println("Invalid input. Try again. \n");
 								continue;
 							}
 						}
-						break;
+						continue;
 					}
 					break;
 				default:

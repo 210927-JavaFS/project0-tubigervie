@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
 
+//reference: https://www.javatpoint.com/how-to-encrypt-password-in-java
+
 public class CryptoUtils {
 	
 	private final static String algorithm = "SHA-256";

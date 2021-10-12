@@ -55,16 +55,17 @@ public class StandardUserDeckMenuController {
 	{
 		ArrayList<Integer> decks = standardUserService.getDecks(user);
 		int deckCount = decks.size();
-		printDeckList(user, decks, deckCount);
 		if(deckCount > 0) {
 			while(true)
 			{
-				System.out.println("\nType in the number of the deck you would like to edit.");
+				printDeckList(user, decks, deckCount);
+				System.out.println("\nType in the number of the deck you would like to edit or type RETURN.");
 				String response = scan.nextLine().trim();
 				try {
+					if(response.equals("return")) return true;
 					int number = Integer.parseInt(response);
 					if(number > deckCount || number <= 0) {
-						System.out.println("Invalid input. Try again. \n");
+						System.out.println("\nInvalid input. Try again. \n");
 						continue;
 					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
@@ -88,7 +89,7 @@ public class StandardUserDeckMenuController {
 					}	
 				}
 				catch(NumberFormatException e){
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					continue;
 				}
 			}
@@ -100,17 +101,18 @@ public class StandardUserDeckMenuController {
 	{
 		ArrayList<Integer> decks = standardUserService.getDecks(user);
 		int deckCount = decks.size();
-		printDeckList(user, decks, deckCount);
 		if(deckCount > 0)
 		{
 			while(true)
 			{
-				System.out.println("Type in the number of the deck you would like to delete.");
+				printDeckList(user, decks, deckCount);
+				System.out.println("\nType in the number of the deck you would like to delete or type RETURN.");
 				String response2 = scan.nextLine().trim();
+				if(response2.equals("return")) return true;
 				try {
 					int number = Integer.parseInt(response2);
 					if(number > deckCount || number <= 0) {
-						System.out.println("Invalid input. Try again. \n");
+						System.out.println("\nInvalid input. Try again.");
 						continue;
 					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
@@ -119,7 +121,7 @@ public class StandardUserDeckMenuController {
 					return true;
 				}
 				catch(NumberFormatException e){
-					System.out.println("Invalid input. Try again. \n");
+					System.out.println("\nInvalid input. Try again.");
 				}
 			}
 		}
@@ -140,7 +142,7 @@ public class StandardUserDeckMenuController {
 			sortedDeckMap = deckService.createDeckTreeMap(deck);
 			System.out.println(String.format("\n%s", deck.toString()));
 			printDeck(user, sortedDeckMap);
-			System.out.println("\nType in the number of the card you would like to remove or type RETURN when done.");
+			System.out.println("\nType in the number of the card you would like to remove or type RETURN.");
 			String response2 = scan.nextLine().trim();
 			
 			if(response2.equalsIgnoreCase("return")) return;
@@ -162,12 +164,12 @@ public class StandardUserDeckMenuController {
 				}
 				else 
 				{
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					continue;
 				}
 			}
 			catch(NumberFormatException e){
-				System.out.println("Invalid input. Try again.");
+				System.out.println("\nInvalid input. Try again.");
 				continue;
 			}
 		}			
@@ -195,7 +197,7 @@ public class StandardUserDeckMenuController {
 			printDeck(user, sortedDeckMap);			
 			System.out.println("\nInventory");
 			printDeck(user, subsetInventoryMap);
-			System.out.println("\nType in the number of the card you would like to add or type RETURN when done.");
+			System.out.println("\nType in the number of the card you would like to add or type RETURN.");
 			String response2 = scan.nextLine().trim();
 			
 			if(response2.equalsIgnoreCase("return")) return;
@@ -224,12 +226,12 @@ public class StandardUserDeckMenuController {
 				}
 				else 
 				{
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					continue;
 				}
 			}
 			catch(NumberFormatException e){
-				System.out.println("Invalid input. Try again.");
+				System.out.println("\nInvalid input. Try again.");
 				continue;
 			}
 		}		
@@ -252,7 +254,7 @@ public class StandardUserDeckMenuController {
 				case "n":
 					return true;
 				default:
-					System.out.println("Invalid input. Try again.");
+					System.out.println("\nInvalid input. Try again.");
 					continue;
 			}
 		}		
@@ -262,17 +264,18 @@ public class StandardUserDeckMenuController {
 	{
 		ArrayList<Integer> decks = standardUserService.getDecks(user);
 		int deckCount = decks.size();
-		printDeckList(user, decks, deckCount);
 		if(deckCount > 0)
 		{
 			while(true)
 			{
-				System.out.println("Type in the number of the deck you would like to examine.");
+				printDeckList(user, decks, deckCount);
+				System.out.println("\nType in the number of the deck you would like to examine or type RETURN.");
 				String response2 = scan.nextLine().trim();
+				if(response2.equals("return")) return true;
 				try {
 					int number = Integer.parseInt(response2);
-					if(number > deckCount) {
-						System.out.println("Invalid input. Try again. \n");
+					if(number > deckCount|| number <= 0) {
+						System.out.println("\nInvalid input. Try again.");
 						continue;
 					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
@@ -286,7 +289,7 @@ public class StandardUserDeckMenuController {
 					return true;
 				}
 				catch(NumberFormatException e){
-					System.out.println("Invalid input. Try again. \n");
+					System.out.println("\nInvalid input. Try again.");
 				}
 			}
 		}

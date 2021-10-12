@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import com.revature.models.Card;
 import com.revature.models.Card.CardType;
@@ -15,10 +16,13 @@ import com.revature.models.Card.RarityType;
 import com.revature.models.Minion;
 import com.revature.models.Weapon;
 import com.revature.utils.ConnectionUtil;
+import com.revature.utils.TokenizerUtil;
 
 public class CardDAO {
 
 	public HashMap<Integer, Card> cardMap;
+	
+	public HashMap<String, ArrayList<Integer>> tokenMap;
 	
 	public CardDAO() 
 	{
@@ -27,12 +31,33 @@ public class CardDAO {
 	}
 	
 	public Card findCard(int id) {
-		return (cardMap.containsKey(id)) ? cardMap.get(id) : null;
+		return (cardMap.containsKey(id) ? cardMap.get(id) : retrieveCardByID(id));
+	}
+	
+	public ArrayList<Card> findCardsByQuery(String name)
+	{
+		HashSet<Card> hits = new HashSet<Card>();
+		ArrayList<String> tokens = TokenizerUtil.getTokens(name);
+		HashSet<Integer> commonIDs = new HashSet<Integer>();
+		for(String token : tokens)
+		{
+			if(tokenMap.containsKey(token))
+				for(Integer id : tokenMap.get(token))
+					commonIDs.add(id);
+		}
+		for(Integer id : commonIDs)
+		{
+			Card card = findCard(id);
+			if(card != null)
+				hits.add(card);
+		}
+		return new ArrayList<Card>(hits);
 	}
 	
 	public ArrayList<Card> findCardsByType(CardType c_type)
 	{
 		ArrayList<Card> cardList = new ArrayList<Card>();
+		
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
@@ -98,7 +123,7 @@ public class CardDAO {
 		return cardList;
 	}
 	
-	public Card findCard(String name)
+	private Card retrieveCardByID(int id)
 	{
 		Card card = null;
 		try(Connection conn = ConnectionUtil.getConnection())
@@ -109,10 +134,10 @@ public class CardDAO {
 					+ "FROM cards c \r\n"
 					+ "	FULL JOIN minions m ON (c.card_id = m.card_id)\r\n"
 					+ "	FULL JOIN weapons w ON (c.card_id = w.card_id)\r\n"
-					+ " WHERE LOWER(c.card_name) = ?";
+					+ " WHERE LOWER(c.card_id) = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			int count = 0;
-			statement.setString(++count, name);
+			statement.setInt(++count, id);
 			ResultSet result = statement.executeQuery();
 			while(result.next())
 			{
@@ -178,7 +203,7 @@ public class CardDAO {
 			Statement statement = conn.createStatement();
 			ResultSet result = statement.executeQuery(sql);
 			cardMap = new HashMap<Integer, Card>();
-			
+			tokenMap = new HashMap<String, ArrayList<Integer>>();
 			while(result.next())
 			{
 				CardType cardType = CardType.valueOf(result.getString("card_type"));
@@ -219,9 +244,23 @@ public class CardDAO {
 							ClassType.valueOf(result.getString("class_type")));
 					break;		
 				}
-				
-				if(card != null && !cardMap.containsKey(card.getIndex()))
-					cardMap.put(card.getIndex(), card);
+				if(card != null)
+				{
+					ArrayList<String> cardTokens = TokenizerUtil.getTokens(card.getName());
+					for(String token : cardTokens)
+					{
+						if(!tokenMap.containsKey(token))
+						{
+							ArrayList<Integer> cardIDs = new ArrayList<Integer>();
+							cardIDs.add(card.getIndex());
+							tokenMap.put(token, cardIDs);
+						}
+						else
+							tokenMap.get(token).add(card.getIndex());
+					}
+					if(!cardMap.containsKey(card.getIndex()))
+						cardMap.put(card.getIndex(), card);
+				}
 			}
 		}
 		catch(SQLException e)

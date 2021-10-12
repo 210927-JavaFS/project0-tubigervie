@@ -21,9 +21,9 @@ public class CardService {
 		return cardDAO.findCard(id);
 	}
 	
-	public Card findCard(String name)
+	public ArrayList<Card> findCard(String name)
 	{
-		return cardDAO.findCard(name);
+		return cardDAO.findCardsByQuery(name);
 	}
 	
 	public ArrayList<Card> findCardsByType(CardType cType)
