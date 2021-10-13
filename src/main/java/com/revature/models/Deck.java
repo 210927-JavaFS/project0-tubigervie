@@ -81,11 +81,13 @@ public class Deck {
 	
 	public void removeCard(Card card)
 	{
-		if(deckMap.containsKey(card.index))
-			deckMap.put(card.index, deckMap.get(card.index) - 1);
-		if(deckMap.get(card.index) == 0)
-			deckMap.remove(card.index);
-		currentCardCount--;
+		if(deckMap.containsKey(card.getIndex()))
+		{
+			deckMap.put(card.getIndex(), deckMap.get(card.getIndex()) - 1);	
+			if(deckMap.get(card.getIndex()) == 0)
+				deckMap.remove(card.getIndex());
+			currentCardCount--;
+		}
 	}
 	
 	@Override

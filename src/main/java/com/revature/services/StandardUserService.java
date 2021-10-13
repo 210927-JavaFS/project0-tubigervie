@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import com.revature.daos.DeckDAO;
 import com.revature.daos.StandardUserDAO;
+import com.revature.models.Card;
+import com.revature.models.Deck;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
 import com.revature.models.User.AccountType;
@@ -13,15 +14,31 @@ import com.revature.models.User.AccountType;
 public class StandardUserService extends UserService
 {
 	private static StandardUserDAO userDAO = new StandardUserDAO();
-	private static DeckDAO deckDAO = new DeckDAO();
+	
+	private DeckService deckService = new DeckService();
+	private CardService cardService = new CardService();
 	
 	public User createNewUser(String username, String password) {
 		return new StandardUser(username, password, AccountType.standard);
 	}
 	
-	public void addCardToInventory(StandardUser user, int cardID) 
+	public boolean addCardToInventory(StandardUser user, int cardID, Card.RarityType rarity) 
 	{
-		user.addToInventory(cardID);
+		boolean flag = user.addToInventory(cardID, rarity == Card.RarityType.legendary);
+		updateAccountInfo(user);
+		return flag;
+	}
+	
+	public void removeCardFromInventory(StandardUser user, int cardID)
+	{
+		user.removeFromInventory(cardID);
+		for(Integer i : user.getDecks())
+		{
+			System.out.println("Deck id: " + i);
+			Deck deck = deckService.getDeck(i);
+			deck.removeCard(cardService.findCard(cardID));
+			deckService.updateDAO(deck);
+		}
 		updateAccountInfo(user);
 	}
 	
@@ -42,24 +59,14 @@ public class StandardUserService extends UserService
 		return user.getDecks();
 	}
 	
-	public ArrayList<Integer> getInventory(StandardUser user)
+	public HashMap<Integer, Integer> getInventory(StandardUser user)
 	{
 		return user.getInventory();
 	}
 	
-	public HashMap<Integer, Integer> getInventoryHashMap(StandardUser user)
+	public ArrayList<Integer> getInventoryArray(StandardUser user, boolean noDuplicates)
 	{
-		ArrayList<Integer> inventory = getInventory(user);
-		HashMap<Integer, Integer> inventoryMap = new HashMap<Integer, Integer>();
-		for(int i = 0; i < inventory.size(); i++)
-		{
-			Integer itemIndex = inventory.get(i);
-			if(inventoryMap.containsKey(itemIndex))
-				inventoryMap.put(itemIndex, inventoryMap.get(itemIndex) + 1);
-			else
-				inventoryMap.put(itemIndex, 1);
-		}
-		return inventoryMap;
+		return user.getInventoryArray(noDuplicates);
 	}
 	
 	public TreeMap<Integer, Integer> getInventoryTreeMap(StandardUser user, HashMap<Integer, Integer> inventoryMap)
@@ -71,11 +78,12 @@ public class StandardUserService extends UserService
 	public void loadInventory(StandardUser user)
 	{
 		userDAO.load(user);
-		deckDAO.loadDecks(user);
+		deckService.loadDecks(user);
 	}
 	
 	public void updateAccountInfo(User user)
 	{
 		userDAO.updateUser(user);
 	}
+	
 }

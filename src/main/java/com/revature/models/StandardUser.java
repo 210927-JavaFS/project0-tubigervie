@@ -1,11 +1,14 @@
 package com.revature.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 
 public class StandardUser extends User
 {
-	private ArrayList<Integer> inventory = new ArrayList<Integer>();
+	private HashMap<Integer, Integer> inventory = new HashMap<Integer, Integer>();
 	
 	private ArrayList<Integer> decks = new ArrayList<Integer>();
 	
@@ -14,14 +17,38 @@ public class StandardUser extends User
 		// TODO Auto-generated constructor stub
 	}
 	
-	public StandardUser(String username, String password, AccountType type, ArrayList<Integer> inventory) {
+	public StandardUser(String username, String password, AccountType type, HashMap<Integer, Integer> inventory) {
 		super(username, password, type);
 		this.inventory = inventory;
 	}
 	
-	public ArrayList<Integer> getInventory()
+	public ArrayList<Integer> getInventoryArray(boolean noDuplicates)
 	{
-		return this.inventory;
+		if(noDuplicates)
+		{
+			HashSet<Integer> inventorySet = new HashSet<Integer>();
+			for(Map.Entry<Integer, Integer> entry : inventory.entrySet())
+			{
+				for(int i = 0; i < entry.getValue(); i++)
+					inventorySet.add(entry.getKey());
+			}
+			return new ArrayList<>(inventorySet);
+		}
+		else
+		{
+			ArrayList<Integer> inventoryArray = new ArrayList<Integer>();
+			for(Map.Entry<Integer, Integer> entry : inventory.entrySet())
+			{
+				for(int i = 0; i < entry.getValue(); i++)
+					inventoryArray.add(entry.getKey());
+			}
+			return inventoryArray;
+		}	
+	}
+	
+	public HashMap<Integer, Integer> getInventory()
+	{
+		return inventory;
 	}
 	
 	public ArrayList<Integer> getDecks()
@@ -29,9 +56,30 @@ public class StandardUser extends User
 		return this.decks;
 	}
 	
-	public void addToInventory(int cardID)
+	public boolean addToInventory(int cardID, boolean isLegendary)
 	{
-		this.inventory.add(cardID);
+		int maxValue = (isLegendary) ? 1 : 2;	
+		if(this.inventory.containsKey(cardID))
+		{
+			if(this.inventory.get(cardID) < maxValue)
+				this.inventory.put(cardID, this.inventory.get(cardID) + 1);
+			else
+			{
+				System.out.println("\nCannot have more than " + maxValue + " of these cards.");
+				return false;
+			}
+		}
+		else
+			this.inventory.put(cardID, 1);
+		return true;
+	}
+	
+	public void removeFromInventory(int cardID)
+	{
+		if(this.inventory.containsKey(cardID))
+			this.inventory.put(cardID, this.inventory.get(cardID) - 1);
+		if(this.inventory.get(cardID) == 0)
+			this.inventory.remove(cardID);
 	}
 	
 	public void addToDecks(int deckID)
@@ -44,7 +92,7 @@ public class StandardUser extends User
 		this.decks.remove((Integer)deckID);
 	}
 	
-	public void setInventory(ArrayList<Integer> newInv)
+	public void setInventory(HashMap<Integer, Integer> newInv)
 	{
 		this.inventory = newInv;
 	}

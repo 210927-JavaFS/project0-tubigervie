@@ -37,6 +37,11 @@ public class DeckService
 		deckDAO.updateDeck(deck);
 	}
 	
+	public void updateDAO(Deck deck)
+	{
+		deckDAO.updateDeck(deck);
+	}
+	
 	public Deck getDeck(int id)
 	{
 		return deckDAO.findExistingDeck(id);
@@ -105,5 +110,10 @@ public class DeckService
 		}
 		
 		return subsetInventoryMap;
+	}
+	
+	public void loadDecks(StandardUser user)
+	{
+		deckDAO.loadDecks(user);
 	}
 }

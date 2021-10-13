@@ -169,8 +169,9 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 				case "return":
 					return;
 				case "add":
-					userService.addCardToInventory(user, card.getIndex());
-					System.out.println(card.getName().toUpperCase() + " added into your inventory.");
+					boolean flag = userService.addCardToInventory(user, card.getIndex(), card.getRarityType());
+					if(flag)
+						System.out.println(card.getName().toUpperCase() + " added into your inventory.");
 					return;
 				default:
 					System.out.println("Invalid input. Try again.");

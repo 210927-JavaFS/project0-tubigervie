@@ -125,4 +125,3 @@ FROM cards c
 	FULL JOIN weapons w ON (c.card_id = w.card_id);
 	--WHERE LOWER(c.card_name) = 'boar';
 	
-	
