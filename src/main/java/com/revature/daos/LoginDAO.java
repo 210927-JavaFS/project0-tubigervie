@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.models.AdminUser;
+import com.revature.models.ModeratorUser;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
 import com.revature.models.User.AccountType;
@@ -61,19 +63,20 @@ public class LoginDAO
 				switch(AccountType.valueOf(result.getString("acc_type"))) 
 				{
 				case admin:
+					loadedUser = new AdminUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
 					break;
 				case moderator:
+					loadedUser = new ModeratorUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
 					break;
 				case standard:
 					loadedUser = new StandardUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
-					loadedUser.setUserID(result.getInt("user_id"));
 					break;
 				default:
 					loadedUser = new StandardUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
 					break;
 				}
-			}
-		
+				loadedUser.setUserID(result.getInt("user_id"));
+			}	
 			return loadedUser;
 		}
 		catch(SQLException e)

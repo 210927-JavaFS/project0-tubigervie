@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.revature.models.AdminUser;
+import com.revature.models.ModeratorUser;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
+import com.revature.models.User.AccountType;
 import com.revature.utils.ConnectionUtil;
 
 public class StandardUserDAO implements UserDAO
@@ -162,6 +165,82 @@ public class StandardUserDAO implements UserDAO
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public User findUser(String username)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * from logins WHERE user_name = ? and acc_type = ?";
+			
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(++count, username);
+			statement.setString(++count, User.AccountType.standard.toString());
+			
+			statement.execute();
+			
+			ResultSet result = statement.executeQuery();
+			
+			User loadedUser = null;
+			
+			if(result.next())
+			{
+				loadedUser = new StandardUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
+				loadedUser.setUserID(result.getInt("user_id"));
+			}	
+			return loadedUser;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<User> findUsers(AccountType acc_type)
+	{
+		ArrayList<User> users = new ArrayList<User>();
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * from logins WHERE acc_type = ?";
+			
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(++count, acc_type.toString());
+			
+			statement.execute();
+			
+			ResultSet result = statement.executeQuery();
+			
+			User loadedUser = null;
+			
+			while(result.next())
+			{
+				switch(acc_type) {
+					case admin:
+						loadedUser = new AdminUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
+						break;
+					case moderator:
+						loadedUser = new ModeratorUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
+						break;
+					case standard:
+						loadedUser = new StandardUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
+						break;				
+				}
+				loadedUser.setUserID(result.getInt("user_id"));
+			}	
+			users.add(loadedUser);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return users;
 	}
 
 }

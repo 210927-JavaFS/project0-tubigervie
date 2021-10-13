@@ -1,6 +1,8 @@
 package com.revature;
 
+import com.revature.controllers.AdminHomePageMenuController;
 import com.revature.controllers.LoginMenuController;
+import com.revature.controllers.ModeratorHomePageMenuController;
 import com.revature.controllers.StandardUserHomePageMenuController;
 import com.revature.models.User;
 
@@ -13,9 +15,21 @@ public class Driver {
 		while(menuController.getApplicationStatus()) {
 			User user = menuController.getUser();
 			
-			StandardUserHomePageMenuController homePageMenuController = new StandardUserHomePageMenuController();
-			if(user != null) {
-				homePageMenuController.enterHomePage(user);	
+			if(user == null) continue;
+			switch(user.getAccountType()) 
+			{
+				case admin:
+					AdminHomePageMenuController adminHomePage = new AdminHomePageMenuController();
+					adminHomePage.enterHomePage(user);
+					break;
+				case moderator:
+					ModeratorHomePageMenuController modHomePage = new ModeratorHomePageMenuController();
+					modHomePage.enterHomePage(user);
+					break;
+				case standard:
+					StandardUserHomePageMenuController standardHomePage = new StandardUserHomePageMenuController();
+					standardHomePage.enterHomePage(user);	
+					break;			
 			}
 		}
 	}

@@ -3,7 +3,6 @@ package com.revature.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-import com.revature.models.StandardUser;
 import com.revature.models.User;
 import com.revature.services.LoginService;
 import com.revature.services.StandardUserService;
@@ -58,7 +57,6 @@ public class LoginMenuController {
 					System.out.println("\nInvalid username/password combination.");
 				}
 				else {
-					userService.loadInventory((StandardUser)user);
 					System.out.println("Now logging in...\n");
 				}		
 				return user;

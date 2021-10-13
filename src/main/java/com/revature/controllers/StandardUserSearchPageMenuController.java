@@ -14,8 +14,8 @@ import com.revature.services.StandardUserService;
 
 public class StandardUserSearchPageMenuController extends SearchPageMenuController
 {
-	private CardService cardService = new CardService();
-	private StandardUserService userService = new StandardUserService();
+	protected CardService cardService = new CardService();
+	protected StandardUserService userService = new StandardUserService();
 	
 	public boolean enterSearchPage(User user)
 	{
@@ -39,7 +39,7 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 		return false;
 	}
 	
-	private boolean enterCardSearch(User user)
+	protected boolean enterCardSearch(User user)
 	{
 		boolean inCardSearch = true;
 		while(inCardSearch)

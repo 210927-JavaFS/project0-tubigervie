@@ -44,4 +44,9 @@ public class User {
 	{
 		return password;
 	}
+	
+	public boolean hasAnInventory()
+	{
+		return accountType == AccountType.standard || accountType == AccountType.moderator;
+	}
 }

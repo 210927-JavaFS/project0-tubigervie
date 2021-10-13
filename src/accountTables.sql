@@ -23,7 +23,7 @@ CREATE TABLE decks(
 CREATE OR REPLACE FUNCTION populate_standard_users() RETURNS TRIGGER AS 
 $BODY$
 BEGIN 
-	IF NEW.acc_type = 'standard' THEN
+	IF NEW.acc_type = 'standard' OR NEW.acc_type = 'moderator' THEN
 		INSERT INTO standard_users (user_id, inventory, decks) 
 		VALUES(NEW.user_id, NULL, NULL); 
 	END IF;
@@ -44,4 +44,4 @@ INSERT INTO logins(user_name, user_pass, acc_type)
 INSERT INTO logins(user_name, user_pass, acc_type)
 	VALUES('adminlog', 'adminpass', 'admin');
 	
-TRUNCATE TABLE logins RESTART IDENTITY CASCADE;
+TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
