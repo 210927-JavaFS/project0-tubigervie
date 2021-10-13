@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.revature.models.StandardUser;
 import com.revature.models.User;
@@ -72,7 +71,7 @@ public class StandardUserDAO implements UserDAO
 			String sql = "UPDATE standard_users SET inventory = ?, decks = ? WHERE user_id = ?";
 			
 			StringBuilder invBuilder = new StringBuilder("");
-			ArrayList<Integer> inv = ((StandardUser) user).getInventoryArray();
+			ArrayList<Integer> inv = ((StandardUser) user).getInventory();
 			for(int i = 0; i < inv.size(); i++)
 			{
 				if(i == inv.size() - 1) 
@@ -125,20 +124,15 @@ public class StandardUserDAO implements UserDAO
 			if(result.next())
 			{
 				String inventoryString = result.getString("inventory");
-				HashMap<Integer, Integer> inventory = new HashMap<Integer, Integer>();
+				ArrayList<Integer> inventory = new ArrayList<Integer>();
 				
 				if(inventoryString != null && !inventoryString.isBlank()) 
 				{
 					String[] inventoryParts = inventoryString.split(",");
 					
 					for(String cardID : inventoryParts)
-					{
-						Integer num = Integer.valueOf(cardID);
-						if(inventory.containsKey(num))
-							inventory.put(num, inventory.get(num) + 1);
-						else
-							inventory.put(num, 1);
-					}
+						inventory.add(Integer.valueOf(cardID));
+				
 					user.setInventory(inventory);
 				}
 

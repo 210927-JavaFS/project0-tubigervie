@@ -64,6 +64,10 @@ public class StandardUserDeckMenuController {
 				try {
 					if(response.equals("return")) return true;
 					int number = Integer.parseInt(response);
+					if(number > deckCount || number <= 0) {
+						System.out.println("\nInvalid input. Try again. \n");
+						continue;
+					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
 					while(true)
 					{
@@ -84,7 +88,7 @@ public class StandardUserDeckMenuController {
 						}
 					}	
 				}
-				catch(NumberFormatException | IndexOutOfBoundsException e){
+				catch(NumberFormatException e){
 					System.out.println("\nInvalid input. Try again.");
 					continue;
 				}
@@ -107,12 +111,16 @@ public class StandardUserDeckMenuController {
 				if(response2.equals("return")) return true;
 				try {
 					int number = Integer.parseInt(response2);
+					if(number > deckCount || number <= 0) {
+						System.out.println("\nInvalid input. Try again.");
+						continue;
+					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
 					standardUserService.removeDeck(user, deck.getDeckID());
 					deckService.deleteDeck(deck);
 					return true;
 				}
-				catch(NumberFormatException | IndexOutOfBoundsException e){
+				catch(NumberFormatException e){
 					System.out.println("\nInvalid input. Try again.");
 				}
 			}
@@ -160,7 +168,7 @@ public class StandardUserDeckMenuController {
 					continue;
 				}
 			}
-			catch(NumberFormatException | IndexOutOfBoundsException e){
+			catch(NumberFormatException e){
 				System.out.println("\nInvalid input. Try again.");
 				continue;
 			}
@@ -175,7 +183,7 @@ public class StandardUserDeckMenuController {
 			return;
 		}
 		
-		HashMap<Integer, Integer> inventoryMap = standardUserService.getInventory(user);
+		HashMap<Integer, Integer> inventoryMap = standardUserService.getInventoryHashMap(user);
 		TreeMap<Integer, Integer> subsetInventoryMap = deckService.getSubsetInventoryTreeMap(deck.getDeckMap(), standardUserService.getInventoryTreeMap(user, inventoryMap));
 		if(subsetInventoryMap.size() == 0) {
 			System.out.println("\nNo cards in your inventory to add.");
@@ -222,7 +230,7 @@ public class StandardUserDeckMenuController {
 					continue;
 				}
 			}
-			catch(NumberFormatException | IndexOutOfBoundsException e){
+			catch(NumberFormatException e){
 				System.out.println("\nInvalid input. Try again.");
 				continue;
 			}
@@ -266,6 +274,10 @@ public class StandardUserDeckMenuController {
 				if(response2.equals("return")) return true;
 				try {
 					int number = Integer.parseInt(response2);
+					if(number > deckCount|| number <= 0) {
+						System.out.println("\nInvalid input. Try again.");
+						continue;
+					}
 					Deck deck = deckService.getDeck(decks.get(number - 1));
 					System.out.println(String.format("\n%s", deck.toString()));
 					HashMap<Integer, Integer> deckCardMap = deck.getDeckMap();
@@ -276,7 +288,7 @@ public class StandardUserDeckMenuController {
 					}
 					return true;
 				}
-				catch(NumberFormatException | IndexOutOfBoundsException e){
+				catch(NumberFormatException e){
 					System.out.println("\nInvalid input. Try again.");
 				}
 			}

@@ -106,9 +106,4 @@ public class DeckService
 		
 		return subsetInventoryMap;
 	}
-	
-	public void loadDecks(StandardUser user)
-	{
-		deckDAO.loadDecks(user);
-	}
 }
