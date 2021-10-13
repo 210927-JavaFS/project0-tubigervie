@@ -1,9 +1,8 @@
 package com.revature.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 import com.revature.models.Card;
 import com.revature.models.Minion;
@@ -22,20 +21,20 @@ public class StandardUserInventoryMenuController {
 	{
 		boolean inInventory = true;
 		while(inInventory) {
-			System.out.println("\nInventory - What would you like to do? \n" + "VIEW | " + "EDIT | " + "RETURN");
+			System.out.println("\nInventory - What would you like to do? \n" + "VIEW | " + "REMOVE | " + "RETURN");
 			String response = scan.nextLine().trim();
+			HashMap<Integer, Integer> inventoryMap = standardUserService.getInventory(user);
+			int cardCount = standardUserService.getInventory(user).size();
+			System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");
 			switch(response.toLowerCase())
 			{
-				case "view":
-					HashMap<Integer, Integer> inventoryMap = standardUserService.getInventoryHashMap(user);
-					int cardCount = standardUserService.getInventory(user).size();
-					
-					System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");					
+				case "view":								
 					if(cardCount > 0)
-						inInventory = enterView(inventoryMap, cardCount, user);		
+						inInventory = enterInventory(inventoryMap, cardCount, user);		
 					break;
-				case "edit":
-					//inInventory = enterEdit(user);
+				case "remove":
+					if(cardCount > 0)
+						inInventory = enterInventory(inventoryMap, cardCount, user, true);	
 					break;
 				case "return":
 					inInventory = false;
@@ -48,37 +47,47 @@ public class StandardUserInventoryMenuController {
 		return false;
 	}
 	
-	private boolean enterView(HashMap<Integer, Integer> inventoryMap, int cardCount, StandardUser user)
+	private boolean enterInventory(HashMap<Integer, Integer> inventoryMap, int cardCount, StandardUser user, boolean isRemoving = false)
 	{
 		while(true)
 		{
-			TreeMap<Integer, Integer> sortedInventoryMap = standardUserService.getInventoryTreeMap(user, inventoryMap);
-			for(Map.Entry<Integer, Integer> entry : sortedInventoryMap.entrySet())
+			ArrayList<Integer> inventoryArray = standardUserService.getInventoryArray(user);
+			inventoryArray.sort((c1, c2) -> ((Integer)c1).compareTo((Integer)c2));
+			for(int i = 0; i < inventoryArray.size(); i++)
 			{
-				Card card = cardService.findCard(entry.getKey());
-				System.out.println(String.format("%d) %s x%d", card.getIndex(), card.getName(), entry.getValue()));
+				Card card = cardService.findCard(inventoryArray.get(i));
+				System.out.println(String.format("%d) %s x%d", i + 1, card.getName(), standardUserService.getInventory(user).get(inventoryArray.get(i))));
 			}
 			
-			System.out.println("\nType in the number ID of the card you would like to examine or type RETURN.");
+			System.out.println("\nType in the number of the card you would like to examine or type RETURN.");
 			String response2 = scan.nextLine().trim();
 			try {
 				if(response2.equals("return")) return true;
 				int number = Integer.parseInt(response2);
-				if(!inventoryMap.containsKey(number)) {
+				if(number > inventoryArray.size() || number <= 0) {
 					System.out.println("\nInvalid input. Try again. \n");
 					continue;
 				}
-				Card card = cardService.findCard(number);
+				Card card = cardService.findCard(inventoryArray.get( number - 1));
 				switch(card.getCardType())
 				{
 					case minion:
-						System.out.println(((Minion)card).toString());
+						if(!isRemoving)
+							System.out.println(((Minion)card).toString());
+						else
+							standardUserService.removeCardFromInventory(user, card.getIndex());
 						break;
 					case weapon:
-						System.out.println(((Weapon)card).toString());
+						if(!isRemoving)
+							System.out.println(((Weapon)card).toString());
+						else
+							standardUserService.removeCardFromInventory(user, card.getIndex());
 						break;
 					default:
-						System.out.println(card.toString());
+						if(!isRemoving)
+							System.out.println(card.toString());
+						else
+							standardUserService.removeCardFromInventory(user, card.getIndex());
 						break;	
 				}
 				return true;
