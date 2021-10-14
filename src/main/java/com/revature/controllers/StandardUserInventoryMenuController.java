@@ -25,7 +25,7 @@ public class StandardUserInventoryMenuController {
 			String response = scan.nextLine().trim();
 			if(response.equalsIgnoreCase("return")) return false;
 			HashMap<Integer, Integer> inventoryMap = standardUserService.getInventory(user);
-			int cardCount = standardUserService.getInventory(user).size();
+			int cardCount = standardUserService.getInventoryArray(user, false).size();
 			System.out.println("\nYour account currently has " + cardCount + " card(s) in your inventory.");	
 			switch(response.toLowerCase())
 			{

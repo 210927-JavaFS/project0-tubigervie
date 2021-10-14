@@ -62,7 +62,7 @@ public class CardDAO {
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
 					+ "	c.mana_cost, c.description, c.rarity, c.card_type,\r\n"
-					+ "	c.class_type, m.attack, m.health, w.charges\r\n"
+					+ "	c.class_type, m.attack, m.health, w.wepAttack, w.charges\r\n"
 					+ "FROM cards c \r\n"
 					+ "	FULL JOIN minions m ON (c.card_id = m.card_id)\r\n"
 					+ "	FULL JOIN weapons w ON (c.card_id = w.card_id)\r\n"
@@ -97,7 +97,7 @@ public class CardDAO {
 							RarityType.valueOf(result.getString("rarity")),
 							CardType.valueOf(result.getString("card_type")),
 							ClassType.valueOf(result.getString("class_type")), 
-							result.getInt("attack"), 
+							result.getInt("wepAttack"), 
 							result.getInt("charges"));
 					break;
 				default:
@@ -130,7 +130,7 @@ public class CardDAO {
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
 					+ "	c.mana_cost, c.description, c.rarity, c.card_type,\r\n"
-					+ "	c.class_type, m.attack, m.health, w.charges\r\n"
+					+ "	c.class_type, m.attack, m.health, w.wepAttack, w.charges\r\n"
 					+ "FROM cards c \r\n"
 					+ "	FULL JOIN minions m ON (c.card_id = m.card_id)\r\n"
 					+ "	FULL JOIN weapons w ON (c.card_id = w.card_id)\r\n"
@@ -164,7 +164,7 @@ public class CardDAO {
 							RarityType.valueOf(result.getString("rarity")),
 							CardType.valueOf(result.getString("card_type")),
 							ClassType.valueOf(result.getString("class_type")), 
-							result.getInt("attack"), 
+							result.getInt("wepAttack"), 
 							result.getInt("charges"));
 					break;
 				default:

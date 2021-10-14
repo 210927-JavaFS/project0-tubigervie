@@ -136,10 +136,10 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 					ArrayList<Integer> deckIDs = userService.getDecks((StandardUser)user);
 					if(deckIDs.size() > 0)
 					{
-						System.out.println(String.format("\nUsername: %s", user.getUserName()));
-						System.out.println("Account Type: " + user.getAccountType());
-						System.out.println(String.format("Inventory: %d card(s)", userService.getInventory((StandardUser) user).size()));
-						System.out.println("Decks:");
+						System.out.println(String.format("\nUsername - %s", user.getUserName()));
+						System.out.println("Account Type - " + user.getAccountType());
+						System.out.println(String.format("Inventory - %d card(s)", userService.getInventory((StandardUser) user).size()));
+						System.out.println("Decks - ");
 						for(int i = 0; i < deckIDs.size(); i++)
 						{
 							Deck deck = deckService.getDeck(deckIDs.get(i));

@@ -15,7 +15,7 @@ CREATE TABLE decks(
 	deck_id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES standard_users(user_id),
 	deck_name VARCHAR(50),
-	card_list VARCHAR(50),
+	card_list VARCHAR(500),
 	card_count INTEGER
 );
 
@@ -48,12 +48,6 @@ CREATE TRIGGER remove_standard_user AFTER DELETE ON logins
 CREATE TRIGGER populate_standard_users AFTER INSERT ON logins
 		FOR EACH ROW 
 		EXECUTE PROCEDURE populate_standard_users();
-	
-INSERT INTO logins(user_name, user_pass, acc_type)
-	VALUES('etubig2', 'helloworld', 'standard');
-	
-INSERT INTO logins(user_name, user_pass, acc_type)
-	VALUES('adminlog', 'adminpass', 'admin');
-	
---TRUNCATE TABLE logins RESTART IDENTITY CASCADE;
---DROP TABLE IF EXISTS logins;
+		
+TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
+DROP TABLE IF EXISTS decks;

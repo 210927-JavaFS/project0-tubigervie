@@ -1,7 +1,7 @@
 package com.revature.models;
 
 public class Card {
-	static final int TOTAL_CARDS = 238;
+	static final int TOTAL_CARDS = 245;
 	
 	public enum CardType {spell, minion, weapon};
 	public enum RarityType {common, rare, epic, legendary};

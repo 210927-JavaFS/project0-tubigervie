@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Deck {
-	static final int MAX_CARDS = 20;
+	static final int MAX_CARDS = 30;
 	
 	static int deckIDCounter = 0;
 	
