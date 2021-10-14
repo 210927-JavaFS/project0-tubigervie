@@ -19,7 +19,6 @@ CREATE TABLE decks(
 	card_count INTEGER
 );
 
-
 CREATE OR REPLACE FUNCTION populate_standard_users() RETURNS TRIGGER AS 
 $BODY$
 BEGIN 
@@ -31,17 +30,30 @@ BEGIN
 END
 $BODY$
 LANGUAGE plpgsql;
+	
+CREATE OR REPLACE FUNCTION remove_standard_user() RETURNS TRIGGER AS 
+$BODY$
+BEGIN 
+	DELETE FROM decks WHERE user_id = OLD.user_id;
+	DELETE FROM standard_users WHERE user_id = OLD.user_id;
+	RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
 
-DROP TABLE IF EXISTS logins;
-
+CREATE TRIGGER remove_standard_user AFTER DELETE ON logins
+		FOR EACH ROW 
+		EXECUTE PROCEDURE remove_standard_user();
+	
 CREATE TRIGGER populate_standard_users AFTER INSERT ON logins
 		FOR EACH ROW 
 		EXECUTE PROCEDURE populate_standard_users();
-		
+	
 INSERT INTO logins(user_name, user_pass, acc_type)
-	VALUES('etubig', 'helloworld', 'standard');
+	VALUES('etubig2', 'helloworld', 'standard');
 	
 INSERT INTO logins(user_name, user_pass, acc_type)
 	VALUES('adminlog', 'adminpass', 'admin');
 	
-TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
+--TRUNCATE TABLE logins RESTART IDENTITY CASCADE;
+--DROP TABLE IF EXISTS logins;

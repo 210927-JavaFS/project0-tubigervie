@@ -85,4 +85,24 @@ public class LoginDAO
 		}
 		return null;
 	}
+	
+	public boolean deleteLogin(int id)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "DELETE from logins WHERE user_id = ?";
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(++count, id);
+			statement.execute();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

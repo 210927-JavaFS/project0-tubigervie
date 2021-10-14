@@ -190,6 +190,7 @@ public class StandardUserDAO implements UserDAO
 			{
 				loadedUser = new StandardUser(result.getString("user_name"), result.getString("user_pass"), AccountType.valueOf(result.getString("acc_type")));
 				loadedUser.setUserID(result.getInt("user_id"));
+				load((StandardUser)loadedUser);
 			}	
 			return loadedUser;
 		}
@@ -233,8 +234,10 @@ public class StandardUserDAO implements UserDAO
 						break;				
 				}
 				loadedUser.setUserID(result.getInt("user_id"));
+				if(loadedUser.hasAnInventory())
+					load((StandardUser)loadedUser);
+				users.add(loadedUser);
 			}	
-			users.add(loadedUser);
 		}
 		catch(SQLException e)
 		{

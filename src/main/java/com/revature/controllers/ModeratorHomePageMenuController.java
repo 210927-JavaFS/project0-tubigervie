@@ -19,7 +19,7 @@ public class ModeratorHomePageMenuController extends HomePageMenuController
 			switch(response.toLowerCase())
 			{
 				case "search": // open SearchMenuController
-					StandardUserSearchPageMenuController search = new StandardUserSearchPageMenuController();
+					ModeratorSearchPageMenuController search = new ModeratorSearchPageMenuController();
 					search.enterSearchPage(user);
 					System.out.println();
 					break;

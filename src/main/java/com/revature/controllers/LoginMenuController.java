@@ -85,12 +85,12 @@ public class LoginMenuController {
 					System.out.println("Could not encrypt password");
 					e.printStackTrace();
 				}
-				System.out.println("creating new account");
+				System.out.println("Created new account!\n");
 				user = userService.createNewUser(username, password);
 				loginService.uploadNewLogin(user);
 				return null;
 			case "quit":
-				System.out.println("Thank you for using the application. Hope to see you again!");
+				System.out.println("\nThank you for using the application. Hope to see you again!");
 				applicationIsRunning = false;
 				return null;
 			default:
