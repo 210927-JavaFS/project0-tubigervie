@@ -2,45 +2,18 @@ package com.revature.controllers;
 
 import java.util.ArrayList;
 
+import com.revature.models.Card;
 import com.revature.models.Deck;
+import com.revature.models.Minion;
 import com.revature.models.StandardUser;
 import com.revature.models.User;
+import com.revature.models.Weapon;
 import com.revature.models.User.AccountType;
-import com.revature.services.DeckService;
-import com.revature.services.ModerationService;
 
-public class ModeratorSearchPageMenuController extends StandardUserSearchPageMenuController
+public class AdminSearchPageMenuController extends ModeratorSearchPageMenuController
 {
-	protected ModerationService modService = new ModerationService();
-	protected DeckService deckService = new DeckService();
-	
 	@Override
-	public boolean enterSearchPage(User user)
-	{
-		boolean inSearch = true;
-		while(inSearch) {
-			System.out.println("\nSearch - What would you like to search? \n" + "CARD | " + "ACCOUNT | " + "RETURN");
-			String response = scan.nextLine().trim();
-			switch(response.toLowerCase())
-			{
-				case "card":		
-					inSearch = enterCardSearch(user);
-					break;
-				case "account":
-					inSearch = enterAccountSearch(user);
-					break;
-				case "return":
-					inSearch = false;
-					break;
-				default:
-					System.out.println("\nInvalid input. Try again.");
-					break;
-			}
-		}
-		return false;
-	}
-	
-	protected boolean enterAccountSearch(User user)
+	protected boolean enterAccountSearch(User self)
 	{
 		boolean inAccountSearch = true;
 		while(inAccountSearch)
@@ -55,9 +28,9 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 						System.out.println("\nEnter the name of the account you would like to look up or type R to return.");
 						String search = scan.nextLine().trim().toLowerCase();
 						if(search.equals("r")) break;
-						User result = modService.findUserByName(search);
+						User user = modService.findUserByName(search);
 						if(user != null)
-							enterAccountView(result);
+							enterAccountView(user);
 						else 
 							System.out.println("\nCould not find any results.");
 					}
@@ -68,7 +41,7 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 				case "type":
 					while(true)
 					{
-						System.out.println("\nSearch - What type of account would you like to search by?\nSTANDARD | RETURN");
+						System.out.println("\nSearch - What type of account would you like to search by?\nSTANDARD | MOD | ADMIN | RETURN");
 						String search = scan.nextLine().trim().toLowerCase();
 						if(search.equals("return")) break;
 						ArrayList<User> users = null;
@@ -76,6 +49,12 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 						{
 							case "standard":
 								users = modService.findUsersByType(AccountType.standard);
+								break;
+							case "mod":
+								users = modService.findUsersByType(AccountType.moderator);
+								break;
+							case "admin":
+								users = modService.findUsersByType(AccountType.admin);
 								break;
 							default:
 								System.out.println("Invalid input. Try again.");
@@ -86,23 +65,31 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 						while(true)
 						{
 							System.out.println();
+							for(User user : users)
+							{
+								if(user.getUserID() == self.getUserID())
+								{
+									users.remove(user);
+									break;
+								}
+							}
 							if(users.size() == 0)
 							{
-								System.out.println("\nNo other users found!");
+								System.out.println("No other users found!");
 								break;
 							}
 							for(int i = 0; i < users.size(); i++)
 							{
-								User result = users.get(i);
-								System.out.println(String.format("%d) %s", i + 1, result.getUserName()));
+								User user = users.get(i);
+								System.out.println(String.format("%d) %s", i + 1, user.getUserName()));
 							}
 							System.out.println("\nType in the number of the account you would like to examine or type RETURN.");
 							String response2 = scan.nextLine().trim();
 							try {
 								if(response2.equals("return")) break;
 								int number = Integer.parseInt(response2);
-								User result = users.get(number - 1);
-								enterAccountView(result);
+								User user = users.get(number - 1);
+								enterAccountView(user);
 								break;
 							}
 							catch(NumberFormatException | IndexOutOfBoundsException e){
@@ -121,6 +108,7 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 		return true;
 	}
 	
+	@Override
 	protected void enterAccountView(User user)
 	{
 		while(true)
@@ -133,18 +121,21 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 				case "return":
 					return;
 				case "info":
-					ArrayList<Integer> deckIDs = userService.getDecks((StandardUser)user);
-					if(deckIDs.size() > 0)
+					System.out.println(String.format("\nUsername: %s", user.getUserName()));
+					System.out.println("Account Type: " + user.getAccountType());
+					if(user.hasAnInventory())
 					{
-						System.out.println(String.format("\nUsername: %s", user.getUserName()));
-						System.out.println("Account Type: " + user.getAccountType());
-						System.out.println(String.format("Inventory: %d card(s)", userService.getInventory((StandardUser) user).size()));
-						System.out.println("Decks:");
-						for(int i = 0; i < deckIDs.size(); i++)
+						ArrayList<Integer> deckIDs = userService.getDecks((StandardUser)user);
+						if(deckIDs.size() > 0)
 						{
-							Deck deck = deckService.getDeck(deckIDs.get(i));
-							System.out.println(String.format("%d) %s", i+1, deck.getName()));
-						}
+							System.out.println(String.format("Inventory: %d card(s)", userService.getInventory((StandardUser) user).size()));
+							System.out.println("Decks:");
+							for(int i = 0; i < deckIDs.size(); i++)
+							{
+								Deck deck = deckService.getDeck(deckIDs.get(i));
+								System.out.println(String.format("%d) %s", i+1, deck.getName()));
+							}
+						}	
 					}
 					break;
 				case "delete":
@@ -157,9 +148,7 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 						{
 							case "y":
 								if(modService.deleteUser(user.getUserID()))
-								{
 									System.out.println("\nAccount successfully deleted.");	
-								}
 								return;
 							case "n":
 								inDelete = false;
@@ -172,5 +161,22 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 					break;
 			}
 		}		
+	}
+	
+	@Override
+	protected void enterCardView(Card card, StandardUser user)
+	{
+		switch(card.getCardType())
+		{
+			case minion:
+				System.out.println(((Minion)card).toString());
+				break;
+			case weapon:
+				System.out.println(((Weapon)card).toString());
+				break;
+			default:
+				System.out.println(card.toString());
+				break;
+		}
 	}
 }

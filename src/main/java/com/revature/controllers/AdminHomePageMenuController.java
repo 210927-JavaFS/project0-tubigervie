@@ -17,11 +17,14 @@ public class AdminHomePageMenuController extends HomePageMenuController
 			switch(response.toLowerCase())
 			{
 				case "search": // open SearchMenuController
-					StandardUserSearchPageMenuController search = new StandardUserSearchPageMenuController();
+					AdminSearchPageMenuController search = new AdminSearchPageMenuController();
 					search.enterSearchPage(user);
 					System.out.println();
 					break;
 				case "create":
+					AdminCreatePageMenuController create = new AdminCreatePageMenuController();
+					create.enterCreatePage(user);
+					System.out.println();
 					break;
 				case "help":
 					System.out.println("\nSEARCH: search for an account to view or delete \n" + 

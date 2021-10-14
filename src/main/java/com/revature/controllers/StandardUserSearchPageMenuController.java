@@ -146,7 +146,7 @@ public class StandardUserSearchPageMenuController extends SearchPageMenuControll
 		return true;
 	}
 	
-	private void enterCardView(Card card, StandardUser user)
+	protected void enterCardView(Card card, StandardUser user)
 	{
 		switch(card.getCardType())
 		{
