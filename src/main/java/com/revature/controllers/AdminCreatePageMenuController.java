@@ -50,9 +50,9 @@ public class AdminCreatePageMenuController
 					username = null;
 					break;
 				};
-				if(username.length() < 2) 
+				if(username.length() < 2 || username.split(" ").length > 1) 
 				{
-					System.out.println("Username must have atleast 2 characters.\n");
+					System.out.println("\nUsername must have atleast 2 characters and cannot have spaces.\n");
 					continue;
 				}
 				break;
@@ -66,9 +66,9 @@ public class AdminCreatePageMenuController
 					password = null;
 					break;
 				};
-				if(password.length() < 3) 
+				if(password.length() < 3 || password.split(" ").length > 1) 
 				{
-					System.out.println("Password must have atleast 3 characters.\n");
+					System.out.println("\nPassword must have atleast 3 characters and cannot have spaces.\n");
 					continue;
 				}
 				break;

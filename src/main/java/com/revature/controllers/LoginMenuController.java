@@ -63,8 +63,12 @@ public class LoginMenuController {
 			case "register":
 				while(true) {
 					System.out.println("Enter a username or type R to return: ");
-					username = scan.nextLine().toLowerCase();
+					username = scan.nextLine().toLowerCase().trim();
 					if(username.equals("r")) return null;
+					if(username.split(" ").length > 1) {
+						System.out.println("\nUsername cannot have spaces.\n");
+						continue;
+					}
 					if(username.length() > 1) break;
 					System.out.println("\nUsername must have atleast 2 characters.\n");
 				}
@@ -74,6 +78,10 @@ public class LoginMenuController {
 					System.out.println("Enter a password or type R to return: ");
 					password = scan.nextLine();
 					if(password.equalsIgnoreCase("r")) return null;
+					if(password.split(" ").length > 1) {
+						System.out.println("\nPassword cannot have spaces.\n");
+						continue;
+					}
 					if(password.length() > 2) break;
 					System.out.println("\nPassword must have atleast 3 characters.\n");
 				}
