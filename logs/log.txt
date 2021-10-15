@@ -58,3 +58,330 @@
 22:51:44.783 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 30) from standard_users table in database.
 22:51:48.299 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to delete user (ID: 30) from standard_users table in database.
 22:51:48.546 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to delete login (ID: 30) from logins table in database.
+22:58:43.712 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:11:44.637 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:12:30.926 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:12:45.775 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.
+23:14:03.791 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:14:49.943 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:14:50.222 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:14:50.669 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:14:50.708 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:14:50.956 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:14:51.000 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:16:05.427 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 11) to user (ID: 4) inventory.
+23:16:05.427 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:16:25.848 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+23:16:31.067 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 26) to user (ID: 4) inventory.
+23:16:31.067 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:16:58.602 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 26) from user (ID: 4) inventory.
+23:16:58.602 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 2)
+23:16:58.602 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 2) in decks table from database.
+23:16:58.893 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 3)
+23:16:58.893 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 3) in decks table from database.
+23:16:59.131 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:17:21.523 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+23:17:21.747 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: test deck) to decks table in database.
+23:17:21.982 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 16) to user (ID: 4) deck list.
+23:17:21.982 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:17:27.795 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 16)
+23:17:27.795 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 16) in decks table from database.
+23:17:30.190 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 16)
+23:17:30.190 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 16) in decks table from database.
+23:17:31.616 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 16)
+23:17:31.616 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 16) in decks table from database.
+23:17:32.814 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 16)
+23:17:32.814 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 16) in decks table from database.
+23:17:33.723 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 16)
+23:17:33.723 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 16) in decks table from database.
+23:17:40.045 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 16) from user (ID: 4) deck list.
+23:17:40.045 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:17:40.251 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 16) in decks table from database.
+23:18:18.373 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: etubig) from logins table in database.
+23:18:38.845 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:19:58.503 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:19:58.820 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:19:59.289 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:19:59.332 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:19:59.588 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:19:59.636 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:21:30.216 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 13) to user (ID: 4) inventory.
+23:21:30.216 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:21:55.036 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+23:22:04.394 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 26) to user (ID: 4) inventory.
+23:22:04.394 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:23:03.625 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+23:23:03.870 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: awesome deck) to decks table in database.
+23:23:04.101 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 17) to user (ID: 4) deck list.
+23:23:04.101 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:23:13.334 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 17)
+23:23:13.334 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:16.361 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 17)
+23:23:16.361 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:18.236 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 17)
+23:23:18.236 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:19.360 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 22) to deck (ID: 17)
+23:23:19.360 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:20.792 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 22) to deck (ID: 17)
+23:23:20.792 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:25.137 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 55) to deck (ID: 17)
+23:23:25.137 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:36.445 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 55) from deck (ID: 17)
+23:23:36.446 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 17) in decks table from database.
+23:23:44.019 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 17) from user (ID: 4) deck list.
+23:23:44.019 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:23:44.245 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 17) in decks table from database.
+23:24:19.638 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:24:57.531 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:24:57.824 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:24:58.282 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:24:58.328 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:24:58.579 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:24:58.638 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:25:33.138 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 26) from user (ID: 4) inventory.
+23:25:33.138 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 2)
+23:25:33.138 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 2) in decks table from database.
+23:25:33.370 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 3)
+23:25:33.370 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 3) in decks table from database.
+23:25:33.583 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:26:18.589 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+23:26:25.948 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 26) to user (ID: 4) inventory.
+23:26:25.948 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:26:52.375 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+23:26:52.612 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: awesome deck) to decks table in database.
+23:26:52.846 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 18) to user (ID: 4) deck list.
+23:26:52.846 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:26:56.243 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 18)
+23:26:56.243 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 18) in decks table from database.
+23:26:57.127 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 18)
+23:26:57.127 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 18) in decks table from database.
+23:26:58.158 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 18)
+23:26:58.158 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 18) in decks table from database.
+23:26:59.615 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 18)
+23:26:59.615 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 18) in decks table from database.
+23:27:09.667 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 11) from deck (ID: 18)
+23:27:09.667 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 18) in decks table from database.
+23:27:17.615 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 18) from user (ID: 4) deck list.
+23:27:17.615 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:27:17.838 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 18) in decks table from database.
+23:27:40.802 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tubigervie) from logins table in database.
+23:27:41.168 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 2) from standard_users table in database.
+23:27:41.638 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 4) in decks table from database.
+23:27:41.678 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: best. deck. ever.) to decks table in database.
+23:27:54.591 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find users of type (TYPE: standard) from logins table in database.
+23:27:54.847 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 3) from standard_users table in database.
+23:27:55.111 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:28:12.190 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (ID: 1) in decks table from database.
+23:29:04.755 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.
+23:29:45.812 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:31:21.546 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:31:21.806 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:31:22.263 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:31:22.305 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:31:22.535 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:31:22.576 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:32:26.474 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:33:50.553 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:33:50.820 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:33:51.237 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:33:51.280 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:33:51.508 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:33:51.548 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:34:24.518 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 26) from user (ID: 4) inventory.
+23:34:24.519 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 2)
+23:34:24.519 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 2) in decks table from database.
+23:34:24.774 [] [main] ERROR com.revature.daos.DeckDAO - Could not execute SQL statement.
+23:34:24.775 [] [main] ERROR com.revature.daos.DeckDAO - org.postgresql.util.PSQLException: ERROR: value too long for type character varying(500)
+23:34:24.775 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 3)
+23:34:24.775 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 3) in decks table from database.
+23:34:25.141 [] [main] ERROR com.revature.daos.DeckDAO - Could not execute SQL statement.
+23:34:25.141 [] [main] ERROR com.revature.daos.DeckDAO - org.postgresql.util.PSQLException: ERROR: value too long for type character varying(500)
+23:34:25.141 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:35:04.620 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 13) to user (ID: 4) inventory.
+23:35:04.620 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:35:20.083 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:36:24.900 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:36:25.184 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:36:25.632 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:36:25.673 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:36:25.913 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:36:25.958 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:37:02.530 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 29) from user (ID: 4) inventory.
+23:37:02.530 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 29) from deck (ID: 2)
+23:37:02.530 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 2) in decks table from database.
+23:37:02.793 [] [main] ERROR com.revature.daos.DeckDAO - Could not execute SQL statement.
+23:37:02.793 [] [main] ERROR com.revature.daos.DeckDAO - org.postgresql.util.PSQLException: ERROR: value too long for type character varying(500)
+23:37:02.794 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 29) from deck (ID: 3)
+23:37:02.794 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 3) in decks table from database.
+23:37:03.018 [] [main] ERROR com.revature.daos.DeckDAO - Could not execute SQL statement.
+23:37:03.018 [] [main] ERROR com.revature.daos.DeckDAO - org.postgresql.util.PSQLException: ERROR: value too long for type character varying(500)
+23:37:03.018 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:37:42.022 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 11) to user (ID: 4) inventory.
+23:37:42.022 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:37:49.577 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+23:37:55.381 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 26) to user (ID: 4) inventory.
+23:37:55.381 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:40:03.168 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:40:10.224 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:40:10.460 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:40:10.893 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:40:10.931 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:40:11.148 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:40:11.190 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:41:37.746 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: baduser) from logins table in database.
+23:41:38.004 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 3) from standard_users table in database.
+23:41:38.558 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 1) in decks table from database.
+23:41:38.607 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: inappropriately named deck) to decks table in database.
+23:46:04.274 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:46:12.836 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:46:13.056 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:46:13.476 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 2) in decks table from database.
+23:46:13.518 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: ramp druid) to decks table in database.
+23:46:13.761 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 3) in decks table from database.
+23:46:13.800 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:46:18.273 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 2) from user (ID: 4) deck list.
+23:46:18.273 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:46:18.495 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 2) in decks table from database.
+23:46:21.547 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 3) from user (ID: 4) deck list.
+23:46:21.547 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:46:21.755 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 3) in decks table from database.
+23:46:45.209 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+23:46:45.453 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:46:45.700 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 19) to user (ID: 4) deck list.
+23:46:45.700 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:46:51.581 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 19)
+23:46:51.581 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:46:52.879 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 19)
+23:46:52.879 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:07.926 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 19)
+23:47:07.926 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:12.807 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 19)
+23:47:12.808 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:13.977 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 19)
+23:47:13.977 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:16.784 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 37) to deck (ID: 19)
+23:47:16.784 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:18.285 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 244) to deck (ID: 19)
+23:47:18.286 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:19.812 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 232) to deck (ID: 19)
+23:47:19.812 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:21.255 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 232) to deck (ID: 19)
+23:47:21.255 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:22.353 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 244) to deck (ID: 19)
+23:47:22.353 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:24.050 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 189) to deck (ID: 19)
+23:47:24.050 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:26.381 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 189) to deck (ID: 19)
+23:47:26.381 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:27.690 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 169) to deck (ID: 19)
+23:47:27.690 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:29.430 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 169) to deck (ID: 19)
+23:47:29.430 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:31.407 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 157) to deck (ID: 19)
+23:47:31.408 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:33.198 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 157) to deck (ID: 19)
+23:47:33.198 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:35.414 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 139) to deck (ID: 19)
+23:47:35.414 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:37.866 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 139) to deck (ID: 19)
+23:47:37.866 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:39.551 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 122) to deck (ID: 19)
+23:47:39.551 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:42.373 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 109) to deck (ID: 19)
+23:47:42.373 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:43.757 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 122) to deck (ID: 19)
+23:47:43.758 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:44.832 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 109) to deck (ID: 19)
+23:47:44.832 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:46.821 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 19)
+23:47:46.821 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:47:49.665 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 84) to deck (ID: 19)
+23:47:49.665 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:48:13.616 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 26) to deck (ID: 19)
+23:48:13.617 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:48:34.607 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 19)
+23:48:34.607 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:48:59.931 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:49:00.168 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:49:00.602 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+23:49:00.646 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:49:44.537 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:50:36.493 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:50:36.738 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:50:37.164 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+23:50:37.205 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:51:12.320 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:52:25.539 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:52:25.823 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:52:26.289 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+23:52:26.329 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+23:53:02.914 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 26) from user (ID: 4) inventory.
+23:53:02.915 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 19)
+23:53:02.915 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:53:03.131 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:53:46.230 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+23:53:50.709 [] [main] INFO  com.revature.models.StandardUser - Attempting to add card (ID: 26) to user (ID: 4) inventory.
+23:53:50.709 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:54:28.727 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 26) to deck (ID: 19)
+23:54:28.727 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+23:54:39.432 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+23:54:39.664 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: awesome deck) to decks table in database.
+23:54:39.885 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 20) to user (ID: 4) deck list.
+23:54:39.885 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:54:42.894 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 20)
+23:54:42.894 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 20) in decks table from database.
+23:54:43.927 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 20)
+23:54:43.927 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 20) in decks table from database.
+23:54:45.747 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 244) to deck (ID: 20)
+23:54:45.747 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 20) in decks table from database.
+23:54:52.503 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 20) from user (ID: 4) deck list.
+23:54:52.503 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+23:54:52.735 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 20) in decks table from database.
+23:55:23.536 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tubigervie) from logins table in database.
+23:55:23.799 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 2) from standard_users table in database.
+23:55:24.241 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 4) in decks table from database.
+23:55:24.299 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: best. deck. ever.) to decks table in database.
+23:55:38.100 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find user (NAME: return) from standard_users table in database.
+23:58:30.503 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+23:59:30.790 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+23:59:31.056 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+23:59:31.472 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+23:59:31.512 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+00:00:24.120 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+00:01:04.107 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+00:01:04.360 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+00:01:04.805 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+00:01:04.849 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.
+00:01:39.548 [] [main] INFO  com.revature.models.StandardUser - Attempting to remove card (ID: 26) from user (ID: 4) inventory.
+00:01:39.548 [] [main] INFO  com.revature.models.Deck - Removing card (ID: 26) from deck (ID: 19)
+00:01:39.548 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+00:01:39.917 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+00:02:28.850 [] [main] INFO  com.revature.daos.CardDAO - Attempting to load cards of type weapon from cards table in database.
+00:03:12.648 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 22) to deck (ID: 19)
+00:03:12.648 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 19) in decks table from database.
+00:03:26.582 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to upload deck (ID: 0) to decks table in database.
+00:03:27.069 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: awesome deck) to decks table in database.
+00:03:27.313 [] [main] INFO  com.revature.models.StandardUser - Adding deck (ID: 21) to user (ID: 4) deck list.
+00:03:27.314 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+00:03:30.539 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 21)
+00:03:30.539 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 21) in decks table from database.
+00:03:31.594 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 11) to deck (ID: 21)
+00:03:31.594 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 21) in decks table from database.
+00:03:32.738 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 21)
+00:03:32.738 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 21) in decks table from database.
+00:03:33.648 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 13) to deck (ID: 21)
+00:03:33.648 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 21) in decks table from database.
+00:03:34.965 [] [main] INFO  com.revature.models.Deck - Adding card (ID: 14) to deck (ID: 21)
+00:03:34.966 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to update deck (ID: 21) in decks table from database.
+00:03:41.573 [] [main] INFO  com.revature.models.StandardUser - Removing deck (ID: 21) from user (ID: 4) deck list.
+00:03:41.573 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to update user (ID: 4) from standard_users table in database.
+00:03:41.895 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to delete deck (ID: 21) in decks table from database.
+00:04:13.776 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tubigervie) from logins table in database.
+00:04:14.060 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 2) from standard_users table in database.
+00:04:14.544 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 4) in decks table from database.
+00:04:14.591 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: best. deck. ever.) to decks table in database.
+00:04:34.867 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find users of type (TYPE: standard) from logins table in database.
+00:04:35.121 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 3) from standard_users table in database.
+00:04:35.352 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+00:04:40.229 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (ID: 1) in decks table from database.
+00:05:12.009 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.

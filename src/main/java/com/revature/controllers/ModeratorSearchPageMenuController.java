@@ -54,9 +54,11 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 					{
 						System.out.println("\nEnter the name of the account you would like to look up or type R to return.");
 						String search = scan.nextLine().trim().toLowerCase();
-						if(search.equals("r")) break;
+						if(search.equals("r")) {
+							break;
+						}
 						User result = modService.findUserByName(search);
-						if(user != null)
+						if(result != null)
 							enterAccountView(result);
 						else 
 							System.out.println("\nCould not find any results.");
