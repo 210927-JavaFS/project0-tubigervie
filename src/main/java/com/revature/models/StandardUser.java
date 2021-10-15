@@ -5,9 +5,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class StandardUser extends User
 {
+	private static Logger log = LoggerFactory.getLogger(StandardUser.class);
+	
 	private HashMap<Integer, Integer> inventory = new HashMap<Integer, Integer>();
 	
 	private ArrayList<Integer> decks = new ArrayList<Integer>();
@@ -58,6 +63,7 @@ public class StandardUser extends User
 	
 	public boolean addToInventory(int cardID, boolean isLegendary)
 	{
+		log.info(String.format("Attempting to add card (ID: %d) to user (ID: %d) inventory.", cardID, this.userID));
 		int maxValue = (isLegendary) ? 1 : 2;	
 		if(this.inventory.containsKey(cardID))
 		{
@@ -76,6 +82,7 @@ public class StandardUser extends User
 	
 	public void removeFromInventory(int cardID)
 	{
+		log.info(String.format("Attempting to remove card (ID: %d) from user (ID: %d) inventory.", cardID, this.userID));
 		if(this.inventory.containsKey(cardID))
 			this.inventory.put(cardID, this.inventory.get(cardID) - 1);
 		if(this.inventory.get(cardID) == 0)
@@ -84,11 +91,13 @@ public class StandardUser extends User
 	
 	public void addToDecks(int deckID)
 	{
+		log.info(String.format("Adding deck (ID: %d) to user (ID: %d) deck list.", deckID, this.userID));
 		this.decks.add(deckID);
 	}
 	
 	public void removeDeck(int deckID)
 	{
+		log.info(String.format("Removing deck (ID: %d) from user (ID: %d) deck list.", deckID, this.userID));
 		this.decks.remove((Integer)deckID);
 	}
 	

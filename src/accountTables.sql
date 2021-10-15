@@ -48,6 +48,3 @@ CREATE TRIGGER remove_standard_user AFTER DELETE ON logins
 CREATE TRIGGER populate_standard_users AFTER INSERT ON logins
 		FOR EACH ROW 
 		EXECUTE PROCEDURE populate_standard_users();
-		
-TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
-DROP TABLE IF EXISTS decks CASCADE;

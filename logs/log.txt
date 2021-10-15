@@ -28,3 +28,33 @@
 18:41:26.207 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
 18:42:07.762 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
 18:42:09.524 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:58:31.660 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:58:33.399 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:59:09.334 [] [main] INFO  c.r.c.AdminCreatePageMenuController - testing created new account: testing(standard)
+19:05:31.398 [] [main] INFO  c.r.c.AdminCreatePageMenuController - Created new account: testing (standard)
+19:07:01.873 [] [main] INFO  c.r.c.AdminCreatePageMenuController - Created new account: testing (standard)
+19:08:17.152 [] [main] INFO  c.r.c.AdminCreatePageMenuController - Created new account: testing (standard)
+22:48:33.504 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+22:48:48.201 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.
+22:49:18.698 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find users of type (TYPE: standard) from logins table in database.
+22:49:18.972 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 3) from standard_users table in database.
+22:49:19.225 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+22:49:19.468 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 29) from standard_users table in database.
+22:49:25.514 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (ID: 1) in decks table from database.
+22:49:35.797 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find users of type (TYPE: standard) from logins table in database.
+22:49:36.050 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 3) from standard_users table in database.
+22:49:36.302 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+22:49:36.546 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 29) from standard_users table in database.
+22:49:50.360 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to delete user (ID: 29) from standard_users table in database.
+22:49:50.619 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to delete login (ID: 29) from logins table in database.
+22:50:46.292 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: newuser) from logins table in database.
+22:50:49.635 [] [main] INFO  c.r.controllers.LoginMenuController - Beginning password encryption...
+22:50:49.636 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to insert a new login (ID: -1) to logins table in database.
+22:50:49.847 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: newuser) from logins table in database.
+22:51:16.375 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: newuser) from logins table in database.
+22:51:16.682 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 30) from standard_users table in database.
+22:51:32.028 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.
+22:51:44.553 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to find user (NAME: newuser) from standard_users table in database.
+22:51:44.783 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 30) from standard_users table in database.
+22:51:48.299 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to delete user (ID: 30) from standard_users table in database.
+22:51:48.546 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to delete login (ID: 30) from logins table in database.

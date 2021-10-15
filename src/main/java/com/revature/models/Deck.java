@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Deck {
+	private static Logger log = LoggerFactory.getLogger(Deck.class);
+	
 	static final int MAX_CARDS = 30;
 	
 	static int deckIDCounter = 0;
@@ -62,6 +67,7 @@ public class Deck {
 	
 	public void addCard(Card card)
 	{
+		log.info(String.format("Adding card (ID: %d) to deck (ID: %d)", card.getIndex(), this.deckID));
 		if(deckMap.containsKey(card.index))
 			deckMap.put(card.index, deckMap.get(card.index) + 1);
 		else
@@ -81,6 +87,7 @@ public class Deck {
 	
 	public void removeCard(Card card)
 	{
+		log.info(String.format("Removing card (ID: %d) from deck (ID: %d)", card.getIndex(), this.deckID));
 		if(deckMap.containsKey(card.getIndex()))
 		{
 			deckMap.put(card.getIndex(), deckMap.get(card.getIndex()) - 1);	

@@ -3,12 +3,17 @@ package com.revature.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.models.User;
 import com.revature.services.LoginService;
 import com.revature.services.StandardUserService;
 import com.revature.utils.CryptoUtils;
 
 public class LoginMenuController {
+	private static Logger log = LoggerFactory.getLogger(LoginMenuController.class);
+	
 	private boolean applicationIsRunning = true;
 	private static Scanner scan = new Scanner(System.in);
 	private StandardUserService userService = new StandardUserService();
@@ -92,11 +97,12 @@ public class LoginMenuController {
 				}
 				try 
 				{
+					log.info("Beginning password encryption...");
 					byte[] sha = CryptoUtils.getSHA(password);
 					password = CryptoUtils.Encrypt(sha);
 				} catch (NoSuchAlgorithmException e) {
-					System.out.println("Could not encrypt password");
-					e.printStackTrace();
+					log.warn("Password could not be encrypted.");
+					log.warn(e.toString());
 				}
 				System.out.println("Created new account!\n");
 				user = userService.createNewUser(username, password);

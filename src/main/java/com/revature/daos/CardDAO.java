@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.models.Card;
 import com.revature.models.Card.CardType;
 import com.revature.models.Card.ClassType;
@@ -20,6 +23,8 @@ import com.revature.utils.TokenizerUtil;
 
 public class CardDAO {
 
+	private static Logger log = LoggerFactory.getLogger(CardDAO.class);
+	
 	public HashMap<Integer, Card> cardMap;
 	
 	public HashMap<String, ArrayList<Integer>> tokenMap;
@@ -57,7 +62,7 @@ public class CardDAO {
 	public ArrayList<Card> findCardsByType(CardType c_type)
 	{
 		ArrayList<Card> cardList = new ArrayList<Card>();
-		
+		log.info(String.format("Attempting to load cards of type %s from cards table in database.", c_type.toString()));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
@@ -118,7 +123,8 @@ public class CardDAO {
 		}
 		catch(SQLException e)
 		{
-			System.out.println("Could not connect to database instance.");
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 		}
 		return cardList;
 	}
@@ -126,6 +132,7 @@ public class CardDAO {
 	private Card retrieveCardByID(int id)
 	{
 		Card card = null;
+		log.info(String.format("Attempting to load card (ID: %d) from cards table in database.", id));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
@@ -185,13 +192,15 @@ public class CardDAO {
 		}
 		catch(SQLException e)
 		{
-			System.out.println("Could not connect to database instance.");
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 		}
 		return card;
 	}
 	
 	private void initializeCards()
 	{
+		log.info("Initializing cards from database...");
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT c.card_id, c.card_name,\r\n"
@@ -265,7 +274,8 @@ public class CardDAO {
 		}
 		catch(SQLException e)
 		{
-			System.out.println("Could not connect to database instance.");
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 		}
 	}
 }

@@ -3,6 +3,9 @@ package com.revature.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.models.User;
 import com.revature.models.User.AccountType;
 import com.revature.services.LoginService;
@@ -11,7 +14,9 @@ import com.revature.utils.CryptoUtils;
 
 public class AdminCreatePageMenuController 
 {
+	private static Logger log = LoggerFactory.getLogger(AdminCreatePageMenuController.class);
 	private static Scanner scan = new Scanner(System.in);
+	
 	private ModerationService adminService = new ModerationService();
 	private LoginService loginService = new LoginService();
 	
@@ -81,16 +86,17 @@ public class AdminCreatePageMenuController
 			if(password == null) continue;
 			try 
 			{
+				log.info("Beginning password encryption...");
 				byte[] sha = CryptoUtils.getSHA(password);
 				password = CryptoUtils.Encrypt(sha);
+				user = adminService.createNewUser(username, password, accType);
+				loginService.uploadNewLogin(user);
+				log.info("Created new account: " + username + String.format(" (%s)", accType.toString()));
+				System.out.println("\nCreated new account!");
 			} catch (NoSuchAlgorithmException e) {
-				System.out.println("Could not encrypt password");
-				e.printStackTrace();
+				log.warn("Password could not be encrypted.");
+				log.warn(e.toString());
 			}
-			
-			user = adminService.createNewUser(username, password, accType);
-			loginService.uploadNewLogin(user);
-			System.out.println("\nCreated new account!");
 		}
 		return true;
 	}

@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.models.AdminUser;
 import com.revature.models.ModeratorUser;
 import com.revature.models.StandardUser;
@@ -14,8 +17,11 @@ import com.revature.utils.ConnectionUtil;
 
 public class LoginDAO 
 {
+	private static Logger log = LoggerFactory.getLogger(LoginDAO.class);
+	
 	public boolean addNewLogin(User user)
 	{
+		log.info(String.format("Attempting to insert a new login (ID: %d) to logins table in database.", user.getUserID()));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "INSERT INTO logins (user_name, user_pass, acc_type) "
@@ -34,13 +40,15 @@ public class LoginDAO
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 		}
 		return false;
 	}
 	
 	public User findExistingLogin(String username, String password)
 	{
+		log.info(String.format("Attempting to find login (NAME: %s) from logins table in database.", username));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT * from logins WHERE user_name = ? and user_pass = ?";
@@ -81,13 +89,15 @@ public class LoginDAO
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 		}
 		return null;
 	}
 	
 	public boolean deleteLogin(int id)
 	{
+		log.info(String.format("Attempting to delete login (ID: %d) from logins table in database.", id));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "DELETE from logins WHERE user_id = ?";
@@ -100,7 +110,8 @@ public class LoginDAO
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 			return false;
 		}
 		return true;
@@ -108,6 +119,7 @@ public class LoginDAO
 	
 	public boolean checkIfExists(String username)
 	{
+		log.info(String.format("Attempting to find login (NAME: %s) from logins table in database.", username));
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "SELECT * from logins WHERE user_name = ?";
@@ -129,7 +141,8 @@ public class LoginDAO
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			log.error("Could not execute SQL statement.");
+			log.error(e.toString());
 			return true;
 		}
 		return false;
