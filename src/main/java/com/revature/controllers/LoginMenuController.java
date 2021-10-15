@@ -69,6 +69,11 @@ public class LoginMenuController {
 						System.out.println("\nUsername cannot have spaces.\n");
 						continue;
 					}
+					if(loginService.loginExists(username))
+					{
+						System.out.println("\nThis username is already taken.\n");
+						continue;
+					}
 					if(username.length() > 1) break;
 					System.out.println("\nUsername must have atleast 2 characters.\n");
 				}

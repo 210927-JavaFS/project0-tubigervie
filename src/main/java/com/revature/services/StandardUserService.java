@@ -18,23 +18,27 @@ public class StandardUserService extends UserService
 	private DeckService deckService = new DeckService();
 	private CardService cardService = new CardService();
 	
-	public User createNewUser(String username, String password) {
+	public User createNewUser(String username, String password) { //tested
 		return new StandardUser(username, password, AccountType.standard);
 	}
 	
-	public boolean addCardToInventory(StandardUser user, int cardID, Card.RarityType rarity) 
+	public void deleteStandardUser(int id)
+	{
+		userDAO.deleteStandardUser(id);
+	}
+	
+	public boolean addCardToInventory(StandardUser user, int cardID, Card.RarityType rarity) //tested
 	{
 		boolean flag = user.addToInventory(cardID, rarity == Card.RarityType.legendary);
 		updateAccountInfo(user);
 		return flag;
 	}
 	
-	public void removeCardFromInventory(StandardUser user, int cardID)
+	public void removeCardFromInventory(StandardUser user, int cardID) //tested
 	{
 		user.removeFromInventory(cardID);
 		for(Integer i : user.getDecks())
 		{
-			System.out.println("Deck id: " + i);
 			Deck deck = deckService.getDeck(i);
 			deck.removeCard(cardService.findCard(cardID));
 			deckService.updateDAO(deck);
@@ -42,34 +46,34 @@ public class StandardUserService extends UserService
 		updateAccountInfo(user);
 	}
 	
-	public void addToDecks(StandardUser user, int deckID)
+	public void addToDecks(StandardUser user, int deckID) //tested
 	{
 		user.addToDecks(deckID);
 		updateAccountInfo(user);
 	}
 	
-	public void removeDeck(StandardUser user, int deckID)
+	public void removeDeck(StandardUser user, int deckID) //tested
 	{
 		user.removeDeck(deckID);
 		updateAccountInfo(user);
 	}
 	
-	public ArrayList<Integer> getDecks(StandardUser user)
+	public ArrayList<Integer> getDecks(StandardUser user) //tested
 	{
 		return user.getDecks();
 	}
 	
-	public HashMap<Integer, Integer> getInventory(StandardUser user)
+	public HashMap<Integer, Integer> getInventory(StandardUser user) //tested
 	{
 		return user.getInventory();
 	}
 	
-	public ArrayList<Integer> getInventoryArray(StandardUser user, boolean noDuplicates)
+	public ArrayList<Integer> getInventoryArray(StandardUser user, boolean noDuplicates) //tested
 	{
 		return user.getInventoryArray(noDuplicates);
 	}
 	
-	public TreeMap<Integer, Integer> getInventoryTreeMap(StandardUser user, HashMap<Integer, Integer> inventoryMap)
+	public TreeMap<Integer, Integer> getInventoryTreeMap(StandardUser user, HashMap<Integer, Integer> inventoryMap) //tested
 	{
 		TreeMap<Integer, Integer> sortedMap = new TreeMap<Integer, Integer>(inventoryMap);
 		return sortedMap;

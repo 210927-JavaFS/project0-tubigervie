@@ -144,10 +144,13 @@ public class DeckDAO {
 							deckCardMap.put(id, 1);
 					}
 				}
+				newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
+				deckMap.put(newDeck.getDeckID(), newDeck);
+				return newDeck;
 			}
-			newDeck = new Deck(result.getInt("deck_id"), result.getInt("card_count"), result.getString("deck_name"), deckCardMap);
-			deckMap.put(newDeck.getDeckID(), newDeck);
-			return newDeck;
+			else {
+				return null;
+			}
 		}
 		catch(SQLException e)
 		{

@@ -128,7 +128,7 @@ public class AdminSearchPageMenuController extends ModeratorSearchPageMenuContro
 						ArrayList<Integer> deckIDs = userService.getDecks((StandardUser)user);
 						if(deckIDs.size() > 0)
 						{
-							System.out.println(String.format("Inventory - %d card(s)", userService.getInventory((StandardUser) user).size()));
+							System.out.println(String.format("Inventory - %d card(s)", userService.getInventoryArray((StandardUser) user, false).size()));
 							System.out.println("Decks - ");
 							for(int i = 0; i < deckIDs.size(); i++)
 							{

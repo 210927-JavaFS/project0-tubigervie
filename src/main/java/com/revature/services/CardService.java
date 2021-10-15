@@ -11,22 +11,22 @@ public class CardService {
 	
 	private static CardDAO cardDAO = new CardDAO();
 	
-	public static HashMap<Integer, Card> getAllCards()
+	public static HashMap<Integer, Card> getAllCards() //tested
 	{
 		return cardDAO.cardMap;
 	}
 	
-	public Card findCard(int id)
+	public Card findCard(int id) //tested
 	{
 		return cardDAO.findCard(id);
 	}
 	
-	public ArrayList<Card> findCard(String name)
+	public ArrayList<Card> findCard(String name) //tested
 	{
 		return cardDAO.findCardsByQuery(name);
 	}
 	
-	public ArrayList<Card> findCardsByType(CardType cType)
+	public ArrayList<Card> findCardsByType(CardType cType) //tested
 	{
 		return cardDAO.findCardsByType(cType);
 	}

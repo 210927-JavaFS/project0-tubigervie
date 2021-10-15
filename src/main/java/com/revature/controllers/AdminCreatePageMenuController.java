@@ -55,6 +55,11 @@ public class AdminCreatePageMenuController
 					System.out.println("\nUsername must have atleast 2 characters and cannot have spaces.\n");
 					continue;
 				}
+				if(loginService.loginExists(username))
+				{
+					System.out.println("\nThis username is already taken.\n");
+					continue;
+				}
 				break;
 			}
 			if(username == null) continue;

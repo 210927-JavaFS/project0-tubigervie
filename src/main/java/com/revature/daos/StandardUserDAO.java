@@ -171,14 +171,13 @@ public class StandardUserDAO implements UserDAO
 	{
 		try(Connection conn = ConnectionUtil.getConnection())
 		{
-			String sql = "SELECT * from logins WHERE user_name = ? and acc_type = ?";
+			String sql = "SELECT * from logins WHERE user_name = ?";
 			
 			int count = 0;
 			
 			PreparedStatement statement = conn.prepareStatement(sql);
 			
 			statement.setString(++count, username);
-			statement.setString(++count, User.AccountType.standard.toString());
 			
 			statement.execute();
 			
@@ -199,6 +198,26 @@ public class StandardUserDAO implements UserDAO
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean deleteStandardUser(int id)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "DELETE from standard_users WHERE user_id = ?";
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setInt(++count, id);
+			statement.execute();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	public ArrayList<User> findUsers(AccountType acc_type)

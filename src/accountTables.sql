@@ -6,14 +6,14 @@ CREATE TABLE logins (
 );
 
 CREATE TABLE standard_users(
-	user_id INTEGER REFERENCES logins(user_id) PRIMARY KEY,
+	user_id SERIAL REFERENCES logins(user_id) PRIMARY KEY,
 	inventory VARCHAR(800),
 	decks VARCHAR(100)
 );
 
 CREATE TABLE decks(
 	deck_id SERIAL PRIMARY KEY,
-	user_id INTEGER REFERENCES standard_users(user_id),
+	user_id SERIAL REFERENCES standard_users(user_id),
 	deck_name VARCHAR(50),
 	card_list VARCHAR(500),
 	card_count INTEGER
@@ -50,4 +50,4 @@ CREATE TRIGGER populate_standard_users AFTER INSERT ON logins
 		EXECUTE PROCEDURE populate_standard_users();
 		
 TRUNCATE TABLE standard_users RESTART IDENTITY CASCADE;
-DROP TABLE IF EXISTS decks;
+DROP TABLE IF EXISTS decks CASCADE;

@@ -138,7 +138,7 @@ public class ModeratorSearchPageMenuController extends StandardUserSearchPageMen
 					{
 						System.out.println(String.format("\nUsername - %s", user.getUserName()));
 						System.out.println("Account Type - " + user.getAccountType());
-						System.out.println(String.format("Inventory - %d card(s)", userService.getInventory((StandardUser) user).size()));
+						System.out.println(String.format("Inventory - %d card(s)", userService.getInventoryArray((StandardUser) user, false).size()));
 						System.out.println("Decks - ");
 						for(int i = 0; i < deckIDs.size(); i++)
 						{

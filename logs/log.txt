@@ -1,0 +1,30 @@
+17:23:46.228 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:23:46.982 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+17:26:01.173 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:26:02.106 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+17:30:58.247 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:30:59.546 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+17:31:24.070 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:31:25.452 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+17:35:30.158 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:35:31.560 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+17:37:18.545 [] [main] INFO  com.revature.services.LoginService - A test account has been created and uploaded to database to be used for JUnit tests.
+17:37:19.938 [] [main] INFO  com.revature.services.LoginService - Testing complete. Test account successfully removed from database.
+18:23:26.507 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:23:27.661 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:26:06.050 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:26:07.236 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:28:07.496 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:28:09.008 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:29:57.286 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:29:58.722 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:34:19.459 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:34:20.881 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:35:42.365 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:35:43.816 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:36:10.069 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:36:11.719 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:41:24.532 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:41:26.207 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.
+18:42:07.762 [] [main] INFO  c.r.services.StandardUserService - A test account and deck has been created and uploaded to database to be used for JUnit tests.
+18:42:09.524 [] [main] INFO  c.r.services.StandardUserService - Testing complete. Test deck and account successfully removed from database.

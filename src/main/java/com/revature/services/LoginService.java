@@ -9,7 +9,7 @@ public class LoginService {
 	private static LoginDAO loginDAO = new LoginDAO();
 	private StandardUserService userService = new StandardUserService();
 	
-	public User retrieveExistingLogin(String username, String password) //move to login service
+	public User retrieveExistingLogin(String username, String password) //tested
 	{
 		User user =  loginDAO.findExistingLogin(username, password);
 		if(user != null && user.hasAnInventory())
@@ -17,8 +17,18 @@ public class LoginService {
 		return user;
 	}
 	
-	public void uploadNewLogin(User user)
+	public boolean loginExists(String username) //tested
+	{
+		return loginDAO.checkIfExists(username);
+	}
+	
+	public void uploadNewLogin(User user) //tested
 	{
 		loginDAO.addNewLogin(user);
+	}
+	
+	public boolean deleteLogin(int id)
+	{
+		return loginDAO.deleteLogin(id);
 	}
 }

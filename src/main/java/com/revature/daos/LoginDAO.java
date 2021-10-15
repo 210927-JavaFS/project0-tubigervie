@@ -105,4 +105,33 @@ public class LoginDAO
 		}
 		return true;
 	}
+	
+	public boolean checkIfExists(String username)
+	{
+		try(Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * from logins WHERE user_name = ?";
+			
+			int count = 0;
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(++count, username);
+			
+			statement.execute();
+			
+			ResultSet result = statement.executeQuery();
+			
+			if(result.next())
+			{
+				return true;
+			}	
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return true;
+		}
+		return false;
+	}
 }

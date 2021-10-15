@@ -13,7 +13,7 @@ public class DeckService
 {
 	private static DeckDAO deckDAO = new DeckDAO();
 	
-	public Deck createNewDeck(String deckName, StandardUser user)
+	public Deck createNewDeck(String deckName, StandardUser user) //tested
 	{
 		Deck deckTemplate = new Deck(deckName);
 		deckDAO.uploadDeck(user, deckTemplate);
@@ -22,7 +22,7 @@ public class DeckService
 		return newDeck;
 	}
 	
-	public void addToDeck(Deck deck, Card card)
+	public void addToDeck(Deck deck, Card card) //tested
 	{
 		if(!deck.isFull()) 
 		{
@@ -31,7 +31,7 @@ public class DeckService
 		}
 	}
 	
-	public void removeFromDeck(Deck deck, Card card)
+	public void removeFromDeck(Deck deck, Card card) //tested
 	{
 		deck.removeCard(card);
 		deckDAO.updateDeck(deck);
@@ -42,19 +42,19 @@ public class DeckService
 		deckDAO.updateDeck(deck);
 	}
 	
-	public Deck getDeck(int id)
+	public Deck getDeck(int id) //tested
 	{
 		return deckDAO.findExistingDeck(id);
 	}
 	
-	public void deleteDeck(Deck deck)
+	public void deleteDeck(Deck deck) //tested
 	{
 		if(deckDAO.deckMap.containsKey(deck.getDeckID()))
 			deckDAO.removeFromDeckMap(deck);
 		deckDAO.deleteDeck(deck);
 	}
 	
-	public HashMap<Integer, Integer> createDeckMapCopy(Deck deck)
+	public HashMap<Integer, Integer> createDeckMapCopy(Deck deck) //tested
 	{
 		HashMap<Integer, Integer> copy = new HashMap<Integer, Integer>();
 		for(Map.Entry<Integer, Integer> entry : deck.getDeckMap().entrySet())
@@ -64,13 +64,13 @@ public class DeckService
 		return copy;
 	}
 	
-	public TreeMap<Integer, Integer> createDeckTreeMap(Deck deck)
+	public TreeMap<Integer, Integer> createDeckTreeMap(Deck deck) //tested
 	{
 		TreeMap<Integer, Integer> copy = new TreeMap<Integer, Integer>(deck.getDeckMap());
 		return copy;
 	}
 	
-	public HashMap<Integer, Integer> getSubsetInventoryMap(HashMap<Integer, Integer> deckMap, HashMap<Integer, Integer> inventoryMap) 
+	public HashMap<Integer, Integer> getSubsetInventoryMap(HashMap<Integer, Integer> deckMap, HashMap<Integer, Integer> inventoryMap) //tested
 	{
 		HashMap<Integer, Integer> subsetInventoryMap = new HashMap<Integer, Integer>();
 		
@@ -91,7 +91,7 @@ public class DeckService
 		return subsetInventoryMap;
 	}
 	
-	public TreeMap<Integer, Integer> getSubsetInventoryTreeMap(HashMap<Integer, Integer> deckMap, TreeMap<Integer, Integer> inventoryMap) //Refactor this
+	public TreeMap<Integer, Integer> getSubsetInventoryTreeMap(HashMap<Integer, Integer> deckMap, TreeMap<Integer, Integer> inventoryMap) //Refactor this, tested
 	{
 		TreeMap<Integer, Integer> subsetInventoryMap = new TreeMap<Integer, Integer>();
 		

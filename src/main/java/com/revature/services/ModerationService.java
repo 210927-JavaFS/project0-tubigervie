@@ -15,23 +15,24 @@ public class ModerationService
 	private static StandardUserDAO userDAO = new StandardUserDAO();
 	private static LoginDAO loginDAO = new LoginDAO();
 	
-	public User findUserByName(String username)
+	public User findUserByName(String username) //tested
 	{
 		User user = userDAO.findUser(username);
 		return user;
 	}
 	
-	public ArrayList<User> findUsersByType(User.AccountType accType)
+	public ArrayList<User> findUsersByType(User.AccountType accType) //tested
 	{
 		return userDAO.findUsers(accType);
 	}
 	
 	public boolean deleteUser(int id)
 	{
+		userDAO.deleteStandardUser(id);
 		return loginDAO.deleteLogin(id);
 	}
 	
-	public User createNewUser(String username, String password, AccountType accType) {
+	public User createNewUser(String username, String password, AccountType accType) { //tested
 		switch(accType)
 		{
 			case admin:
