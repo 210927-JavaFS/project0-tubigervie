@@ -385,3 +385,13 @@
 00:04:35.352 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
 00:04:40.229 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (ID: 1) in decks table from database.
 00:05:12.009 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: adminuser) from logins table in database.
+00:06:25.362 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+00:27:38.652 [] [main] INFO  com.revature.daos.CardDAO - Initializing cards from database...
+00:27:45.779 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: etubig) from logins table in database.
+00:27:58.303 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+00:28:22.708 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+00:28:37.652 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+00:28:43.691 [] [main] INFO  com.revature.daos.LoginDAO - Attempting to find login (NAME: tokendruid) from logins table in database.
+00:28:43.919 [] [main] INFO  com.revature.daos.StandardUserDAO - Attempting to load user (ID: 4) from standard_users table in database.
+00:28:44.348 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to load deck (ID: 19) in decks table from database.
+00:28:44.393 [] [main] INFO  com.revature.daos.DeckDAO - Attempting to find deck (NAME: midrange) to decks table in database.

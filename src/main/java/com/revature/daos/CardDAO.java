@@ -41,22 +41,27 @@ public class CardDAO {
 	
 	public ArrayList<Card> findCardsByQuery(String name)
 	{
-		HashSet<Card> hits = new HashSet<Card>();
 		ArrayList<String> tokens = TokenizerUtil.getTokens(name);
-		HashSet<Integer> commonIDs = new HashSet<Integer>();
+		ArrayList<HashSet<Integer>> commonIDs = new ArrayList<HashSet<Integer>>();
 		for(String token : tokens)
 		{
 			if(tokenMap.containsKey(token))
-				for(Integer id : tokenMap.get(token))
-					commonIDs.add(id);
+				commonIDs.add(new HashSet<Integer>(tokenMap.get(token)));
 		}
-		for(Integer id : commonIDs)
+		if(commonIDs.size() == 0) return null;
+		HashSet<Integer> intersection = commonIDs.get(0);
+		for(HashSet<Integer> ids : commonIDs)
+		{
+			intersection.retainAll(ids);
+		}
+		ArrayList<Card> cards = new ArrayList<Card>();
+		for(Integer id : intersection)
 		{
 			Card card = findCard(id);
 			if(card != null)
-				hits.add(card);
+				cards.add(card);
 		}
-		return new ArrayList<Card>(hits);
+		return cards;
 	}
 	
 	public ArrayList<Card> findCardsByType(CardType c_type)
